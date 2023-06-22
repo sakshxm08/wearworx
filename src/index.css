@@ -13,27 +13,27 @@
 .border-fuchsia-700 {
   border-color: #a21caf;
 }
-.bg-sky-700 {
+.hover-bg-sky-700:hover {
   background-color: #0369a1;
 }
-.bg-green-700 {
+.hover-bg-green-700:hover {
   background-color: #15803d;
 }
-.bg-amber-700 {
+.hover-bg-amber-700:hover {
   background-color: #b45309;
 }
-.bg-fuchsia-700 {
+.hover-bg-fuchsia-700:hover {
   background-color: #a21caf;
 }
-.bg-sky-900 {
+.active-bg-sky-900:active {
   background-color: #0c4a6e;
 }
-.bg-green-900 {
+.active-bg-green-900:active {
   background-color: #14532d;
 }
-.bg-amber-900 {
+.active-bg-amber-900:active {
   background-color: #78350f;
 }
-.bg-fuchsia-900 {
+.active-bg-fuchsia-900:active {
   background-color: #701a75;
 }
