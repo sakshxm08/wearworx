@@ -11,6 +11,7 @@ import {
 } from "react-router-dom";
 import { Cart } from "./pages/Cart";
 import { productsData } from "./api/Api";
+// import { firebaseTry } from "./firebase/Firebase";
 
 const Layout = () => {
   return (
@@ -39,6 +40,7 @@ const router = createBrowserRouter([
 ]);
 
 function App() {
+  // firebaseTry();
   return (
     <div className="font-bodyFont">
       <RouterProvider router={router} />

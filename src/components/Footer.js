@@ -1,7 +1,7 @@
 import React from "react";
 import { logoLightText } from "../assets";
 import { FaInstagram, FaFacebookF } from "react-icons/fa";
-
+import { Link } from "react-router-dom";
 export const Footer = () => {
   return (
     <div className="w-screen">
@@ -25,7 +25,9 @@ export const Footer = () => {
           </div>
           <div className="flex gap-4 text-base pt-4">
             <span className="cursor-pointer rounded-full border border-gray-100 text-gray-100 p-2 hover:border-gray-400 hover:text-gray-400 transition-all duration-200 ">
-              <FaInstagram />
+              <Link to="https://www.instagram.com/wear_worx/">
+                <FaInstagram />
+              </Link>
             </span>
             <span className="cursor-pointer rounded-full border border-gray-100 text-gray-100 p-2 hover:border-gray-400 hover:text-gray-400 transition-all duration-200">
               <FaFacebookF />
@@ -42,7 +44,7 @@ export const Footer = () => {
           </div>
         </div>
       </div>
-      <div className="w-full bg-[#21821E] text-white h-20 text-center font-bodyFont  text-lg flex items-center justify-center">
+      <div className="w-full bg-[#21821E] text-white h-10 text-center font-bodyFont  text-base flex items-center justify-center">
         &copy; Copyright 2023 Wearworx - All Rights Reserved
       </div>
     </div>

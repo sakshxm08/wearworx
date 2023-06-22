@@ -7,7 +7,6 @@ export const Banner = () => {
   const [color, setColor] = useState("green");
 
   const banners = [banner1, banner2, banner3, banner4];
-
   const prevSlide = () => {
     setCurrentSlide(currentSlide === 0 ? 3 : (prev) => prev - 1);
     if (currentSlide === 1) setColor("green");
