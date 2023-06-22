@@ -3,7 +3,6 @@ import {
   dresses,
   handbags,
   jeans,
-  jewellery,
   kurtis,
   sarees,
   shirts,
@@ -19,7 +18,7 @@ export const Categories = () => {
     { name: "T-Shirts", img: tshirts },
     { name: "Sarees", img: sarees },
     { name: "Shirts", img: shirts },
-    { name: "Jewellery", img: jewellery },
+    { name: "Jeans", img: jeans },
     { name: "Trousers", img: trousers },
     { name: "Dresses", img: dresses },
   ];
