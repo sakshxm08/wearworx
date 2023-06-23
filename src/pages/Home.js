@@ -4,7 +4,6 @@ import { Banner } from "../components/Banner";
 // import { Products } from "../components/Products";
 // import { useLoaderData } from "react-router-dom";
 import { Categories } from "../components/Categories";
-
 export const Home = () => {
   // const [products, setProducts] = useState([]);
   // const data = useLoaderData();

@@ -1,5 +1,12 @@
-import React from "react";
-
+import React, { useContext } from "react";
+import CategoryContext from "../context/categoryContext";
 export const Cart = () => {
-  return <div>Cart</div>;
+  const category = useContext(CategoryContext);
+
+  console.log(category.selectedCategory);
+  return (
+    <div>
+      <span>{category.selectedCategory}</span>
+    </div>
+  );
 };

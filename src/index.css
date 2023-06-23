@@ -1,6 +1,11 @@
 @tailwind base;
 @tailwind components;
 @tailwind utilities;
+@layer utilities {
+  .whaaaat {
+    -webkit-mask-image: -webkit-radial-gradient(white, black);
+  }
+}
 .border-sky-700 {
   border-color: #0369a1;
 }
