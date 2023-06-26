@@ -1,5 +1,6 @@
 import logoText from "./logo-with-text.png";
 import logoLightText from "./logo-with-text-light.png";
+import logo from "./logo.png";
 import cart from "./cart.png";
 import user from "./user.png";
 import banner1 from "./banner/1.png";
@@ -15,9 +16,12 @@ import jewellery from "./categories/jewellery.jpeg";
 import jeans from "./categories/jeans.jpeg";
 import trousers from "./categories/trousers.jpeg";
 import dresses from "./categories/dresses.jpeg";
+import blurredProduct from "./products-blurred.webp";
+import emptyCart from "./empty-cart.png";
 export {
   logoText,
   logoLightText,
+  logo,
   cart,
   user,
   banner1,
@@ -33,4 +37,6 @@ export {
   jeans,
   trousers,
   dresses,
+  blurredProduct,
+  emptyCart,
 };

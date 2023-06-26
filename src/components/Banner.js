@@ -51,16 +51,16 @@ export const Banner = () => {
             alt="imgFour"
           />
         </div>
-        <div className="absolute w-fit left-0 right-0 mx-auto flex gap-8 bottom-10">
+        <div className="absolute sm:w-fit left-0 right-0 mx-auto flex gap-8 sm:bottom-5 sm:translate-y-0 bottom-[50%] translate-y-1/2 w-full justify-between px-2">
           <div
             onClick={prevSlide}
-            className={`w-14 h-12 border-[1px] border-${color}-700 flex items-center justify-center hover:cursor-pointer hover-bg-${color}-700 hover:text-white active-bg-${color}-900 duration-200`}
+            className={`sm:text-base text-sm  border-[1px] border-${color}-700 flex items-center justify-center hover:cursor-pointer hover-bg-${color}-700 hover:text-white active-bg-${color}-900 duration-200 lg:h-12 h-8 w-8 sm:w-14`}
           >
             <HiArrowLeft />
           </div>
           <div
             onClick={nextSlide}
-            className={`w-14 h-12 border-[1px] border-${color}-700 flex items-center justify-center hover:cursor-pointer hover-bg-${color}-700 hover:text-white active-bg-${color}-900 duration-200`}
+            className={` sm:text-base text-sm border-[1px] border-${color}-700 flex items-center justify-center hover:cursor-pointer hover-bg-${color}-700 hover:text-white active-bg-${color}-900 duration-200 lg:h-12 h-8 w-8 sm:w-14`}
           >
             <HiArrowRight />
           </div>

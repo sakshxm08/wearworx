@@ -10,9 +10,10 @@ import {
   ScrollRestoration,
 } from "react-router-dom";
 import { Cart } from "./pages/Cart";
-import { CategoryProvider } from "./context/CategoryProvider";
-import { Products } from "./components/Products";
-import ProductPage from "./components/ProductPage";
+import { CartProvider } from "./context/CartProvider";
+import { Products } from "./pages/Products";
+import ProductPage from "./pages/ProductPage";
+import { NotFound } from "./pages/NotFound";
 
 const Layout = () => {
   return (
@@ -36,7 +37,8 @@ const router = createBrowserRouter([
       },
       { path: "/cart", element: <Cart /> },
       { path: "/products/:id", element: <Products /> },
-      { path: "/product/:id", element: <ProductPage /> },
+      { path: "/products/:category/product/:id", element: <ProductPage /> },
+      { path: "*", element: <NotFound /> },
     ],
   },
 ]);
@@ -44,11 +46,11 @@ const router = createBrowserRouter([
 function App() {
   // firebaseTry();
   return (
-    <CategoryProvider>
+    <CartProvider>
       <div className="font-bodyFont">
         <RouterProvider router={router} />
       </div>
-    </CategoryProvider>
+    </CartProvider>
   );
 }
 

@@ -7,6 +7,10 @@ module.exports = {
         bodyFont: "Poppins",
         titleFont: "Raleway",
       },
+      screens: {
+        mobile: "500px",
+        tablets: "850px",
+      },
     },
   },
   plugins: [],

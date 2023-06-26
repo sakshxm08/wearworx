@@ -25,10 +25,10 @@ export const CategoryCard = ({ category }) => {
   return (
     // <Link to="products">
     <div
-      className="flex flex-col justify-between items-center gap-4 group w-fit cursor-pointer "
+      className="flex flex-col mx-auto justify-between items-center gap-4 group w-fit cursor-pointer "
       onClick={openCategory}
     >
-      <div className="rounded-full aspect-square w-32 overflow-hidden isolate">
+      <div className="rounded-full aspect-square w-24 md:w-32 overflow-hidden isolate">
         <img
           src={category.img}
           className=" group-hover:scale-[1.2] duration-300 "
