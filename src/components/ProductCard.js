@@ -21,28 +21,28 @@ export const ProductCard = ({ product }) => {
   };
   const cart = useContext(CartContext);
 
-  const addToCart = (product) => {
-    let cartRepeat = cart.cartArray.find(
-      (cartProduct) => cartProduct._id === product._id
-    );
-    if (cartRepeat) {
-      const findRepeatIndex = cart.cartArray.findIndex(
-        (item) => item._id === cartRepeat._id
-      );
-      findRepeatIndex !== -1 && cart.cartArray.splice(findRepeatIndex, 1);
-    }
-    cart.setQty(cart.qty + 1);
-    console.log(cart.qty);
-    cart.addToCart(
-      product._id,
-      product.name,
-      product.url,
-      product.category,
-      product.keywords,
-      product.oldPrice,
-      product.price
-    );
-  };
+  // const addToCart = (product) => {
+  //   let cartRepeat = cart.cartArray.find(
+  //     (cartProduct) => cartProduct._id === product._id
+  //   );
+  //   if (cartRepeat) {
+  //     const findRepeatIndex = cart.cartArray.findIndex(
+  //       (item) => item._id === cartRepeat._id
+  //     );
+  //     findRepeatIndex !== -1 && cart.cartArray.splice(findRepeatIndex, 1);
+  //   }
+  //   cart.setQty(cart.qty + 1);
+  //   console.log(cart.qty);
+  //   cart.addToCart(
+  //     product._id,
+  //     product.name,
+  //     product.url,
+  //     product.category,
+  //     product.keywords,
+  //     product.oldPrice,
+  //     product.price
+  //   );
+  // };
   // useEffect(() => {
   //   console.log(cart.cartArray);
   // }, [cart.cartArray]);
