@@ -1,6 +1,6 @@
-import React, { useContext } from "react";
+import React from "react";
 
-import CartContext from "../context/cartContext";
+// import CartContext from "../context/cartContext";
 
 import { useNavigate } from "react-router-dom";
 import { discountCalc } from "../api/List";
