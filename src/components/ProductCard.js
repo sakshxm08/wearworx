@@ -19,7 +19,7 @@ export const ProductCard = ({ product }) => {
       { state: product, replace: true }
     );
   };
-  const cart = useContext(CartContext);
+  // const cart = useContext(CartContext);
 
   // const addToCart = (product) => {
   //   let cartRepeat = cart.cartArray.find(
