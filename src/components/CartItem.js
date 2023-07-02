@@ -18,10 +18,10 @@ export const CartItem = ({ product }) => {
     <>
       <div>
         <div className="border rounded-sm p-3 pr-7 pb-4 flex w-full gap-4 relative">
-          <div className="object-cover w-24 mobile:w-32">
+          <div className="object-cover w-24 h-full mobile:w-32">
             <img
               src={product.url}
-              className="w-auto h-full object-cover"
+              className="w-full h-auto object-cover"
               alt=""
             />
           </div>

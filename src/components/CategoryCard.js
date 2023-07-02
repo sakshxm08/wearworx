@@ -35,7 +35,7 @@ export const CategoryCard = ({ category }) => {
           alt=""
         />
       </div>
-      <span>{category.name}</span>
+      <span className="font-extralight sm:font-regular">{category.name}</span>
     </div>
     // </Link>
   );
