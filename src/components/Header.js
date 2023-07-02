@@ -8,12 +8,10 @@ export const Header = () => {
   useEffect(() => {
     setCartQty(cartItems.cartArray.length);
   }, [cartItems.cartArray]);
-  const openMenu = () => {
+  const toggleMenu = () => {
     document.getElementById("menu").classList.toggle("hidden");
   };
-  const closeMenu = () => {
-    document.getElementById("menu").classList.toggle("hidden");
-  };
+
   return (
     <div className="w-full bg-white drop-shadow h-20 sticky top-0 z-10">
       <div className="w-11/12 h-full mx-auto flex items-center justify-between">
@@ -25,12 +23,13 @@ export const Header = () => {
               </div>
             </Link>
             <div
-              className="flex tablets:hidden flex-col gap-[6px]"
-              onClick={openMenu}
+              className="flex tablets:hidden flex-col gap-[6px] z-50"
+              onClick={toggleMenu}
+              id="menuButton"
             >
-              <span className="w-6 h-[2px] bg-black"></span>
-              <span className="w-6 h-[2px] bg-black"></span>
-              <span className="w-6 h-[2px] bg-black"></span>
+              <span className="w-6 h-[2px] bg-black duration-200"></span>
+              <span className="w-6 h-[2px] bg-black  duration-200"></span>
+              <span className="w-6 h-[2px] bg-black duration-200"></span>
             </div>
           </div>
           <Link to="/" className="h-full">
@@ -44,7 +43,10 @@ export const Header = () => {
             className="fixed top-0 hidden bg-white w-screen h-screen z-50 p-4 left-0 font-titleFont"
             id="menu"
           >
-            <div className="absolute z-50 flex top-8" onClick={closeMenu}>
+            <div
+              className="absolute z-50 flex top-10 left-7"
+              onClick={toggleMenu}
+            >
               <span className="w-6 h-[2px] bg-black rotate-45 "></span>
               <span className="w-6 h-[2px] bg-black -rotate-45 -translate-x-6"></span>
             </div>
@@ -59,28 +61,44 @@ export const Header = () => {
         </div>
 
         {/* 606701 */}
-        <div className="hidden items-center justify-between gap-8 tablets:flex">
-          <ul className="flex items-center justify-between gap-8 font-titleFont">
-            <Link to="/">
-              <li className="text-black text-base hover:text-green-700 decoration-[1px] cursor-pointer transition-all duration-200 relative after:absolute hover:after:w-full after:w-0 after:transition-all after:duration-300 after:content-[''] after:h-[2px] after:bg-green-700 after:left-0 after:-bottom-1">
-                Home
-              </li>
+        <div className="hidden h-full items-center justify-between gap-8 tablets:flex">
+          <ul className="flex h-full items-center justify-between gap-8 font-titleFont">
+            <Link
+              to="/"
+              className="h-full flex items-center justify-center text-black text-base hover:text-green-700 cursor-pointer transition-all duration-200 relative after:absolute hover:after:w-full after:w-0 after:transition-all after:duration-300 after:content-[''] after:h-[2px] after:bg-green-700 after:left-0 after:bottom-5"
+            >
+              <li>Home</li>
             </Link>
-            <li className="text-black text-base hover:text-green-700 decoration-[1px] cursor-pointer transition-all duration-200 relative after:absolute hover:after:w-full after:w-0 after:transition-all after:duration-300 after:content-[''] after:h-[2px] after:bg-green-700 after:left-0 after:-bottom-1">
-              Pages
-            </li>
-            <li className="text-black text-base hover:text-green-700 decoration-[1px] cursor-pointer transition-all duration-200 relative after:absolute hover:after:w-full after:w-0 after:transition-all after:duration-300 after:content-[''] after:h-[2px] after:bg-green-700 after:left-0 after:-bottom-1">
-              Shop
-            </li>
-            <li className="text-black text-base hover:text-green-700 decoration-[1px] cursor-pointer transition-all duration-200 relative after:absolute hover:after:w-full after:w-0 after:transition-all after:duration-300 after:content-[''] after:h-[2px] after:bg-green-700 after:left-0 after:-bottom-1">
-              Element
-            </li>
-            <li className="text-black text-base hover:text-green-700 decoration-[1px] cursor-pointer transition-all duration-200 relative after:absolute hover:after:w-full after:w-0 after:transition-all after:duration-300 after:content-[''] after:h-[2px] after:bg-green-700 after:left-0 after:-bottom-1">
-              Blog
-            </li>
+            <Link
+              to="/"
+              className="h-full flex items-center justify-center text-black text-base hover:text-green-700 cursor-pointer transition-all duration-200 relative after:absolute hover:after:w-full after:w-0 after:transition-all after:duration-300 after:content-[''] after:h-[2px] after:bg-green-700 after:left-0 after:bottom-5"
+            >
+              <li>Pages</li>
+            </Link>
+            <Link
+              to="/"
+              className="h-full flex items-center justify-center text-black text-base hover:text-green-700 cursor-pointer transition-all duration-200 relative after:absolute hover:after:w-full after:w-0 after:transition-all after:duration-300 after:content-[''] after:h-[2px] after:bg-green-700 after:left-0 after:bottom-5"
+            >
+              <li>Shop</li>
+            </Link>
+            <Link
+              to="/"
+              className="h-full flex items-center justify-center text-black text-base hover:text-green-700 cursor-pointer transition-all duration-200 relative after:absolute hover:after:w-full after:w-0 after:transition-all after:duration-300 after:content-[''] after:h-[2px] after:bg-green-700 after:left-0 after:bottom-5"
+            >
+              <li>Element</li>
+            </Link>
+            <Link
+              to="/"
+              className="h-full flex items-center justify-center text-black text-base hover:text-green-700 cursor-pointer transition-all duration-200 relative after:absolute hover:after:w-full after:w-0 after:transition-all after:duration-300 after:content-[''] after:h-[2px] after:bg-green-700 after:left-0 after:bottom-5"
+            >
+              <li>Blog</li>
+            </Link>
           </ul>
-          <Link to="../cart">
-            <div className="relative flex items-end justify-center text-base gap-2 cursor-pointer group">
+          <Link
+            to="../cart"
+            className="h-full flex justify-center items-center group"
+          >
+            <div className="relative flex items-end justify-center text-base gap-2 cursor-pointer">
               <img src={cart} className="w-7" alt="cart" />
               <span>{cartQty}</span>
               <div className="hidden group-hover:flex bg-gray-800 text-white rounded absolute text-[10px] -bottom-10 w-max px-2 py-[1px]">

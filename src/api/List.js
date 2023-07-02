@@ -1,5 +1,3 @@
-const url =
-  "https://images.pexels.com/photos/2043590/pexels-photo-2043590.jpeg?auto=compress&cs=tinysrgb&w=1260&h=750&dpr=2";
 const discountCalc = (oldPrice, newPrice) => {
   let discount = Math.ceil(((oldPrice - newPrice) / oldPrice) * 100);
   return discount;
@@ -9,9 +7,9 @@ const productsList = [
     name: "Green Colored Kurti",
     category: "kurti",
     keywords: ["women", "ladies", "kurtis", "kurti", "green", "women-wear"],
-    price: 750,
+    price: 800,
     oldPrice: 1500,
-    url: url,
+    url: "https://cdn.shopify.com/s/files/1/0637/4834/1981/products/pista-green-lakhnawi-work-rayon-kurti-peachmode-4.jpg?v=1669040711",
     _id: 1,
   },
   {
@@ -19,8 +17,8 @@ const productsList = [
     category: "kurti",
     keywords: ["women", "ladies", "kurtis", "kurti", "green", "women-wear"],
     price: 750,
-    url: url,
-    _id: 7,
+    url: "https://cdn.shopify.com/s/files/1/0637/4834/1981/products/red-printed-pure-cotton-kurti-peachmode-2.jpg?v=1669066683",
+    _id: 2,
   },
   {
     name: "Blue Jeans",
@@ -28,8 +26,8 @@ const productsList = [
     keywords: ["jeans", "men", "women", "blue", "blue jeans"],
     price: 2000,
     oldPrice: 2500,
-    url: url,
-    _id: 2,
+    url: "https://assets.ajio.com/medias/sys_master/root/20221019/4ikf/634fd570aeb269659c4d8a57/-473Wx593H-441148958-darkblue-MODEL.jpg",
+    _id: 3,
   },
   {
     name: "White Shirt",
@@ -37,8 +35,8 @@ const productsList = [
     keywords: ["white", "shirts", "shirt", "men", "boys"],
     price: 1500,
     oldPrice: 2000,
-    url: url,
-    _id: 3,
+    url: "https://rukminim1.flixcart.com/image/832/832/xif0q/shirt/z/g/n/xl-st1-vebnor-original-imagn7gzxabfjbzp.jpeg?q=70",
+    _id: 4,
   },
   {
     name: "Red Colored Saree",
@@ -46,8 +44,72 @@ const productsList = [
     keywords: ["sarees", "saree", "red", "women", "ladies"],
     price: 1250,
     oldPrice: 2500,
-    url: url,
-    _id: 4,
+    url: "https://rukminim1.flixcart.com/image/612/612/xif0q/sari/b/b/w/free-braso2-o-combo-lorofy-unstitched-original-imagkymbfmjbfeqj.jpeg?q=70",
+    _id: 5,
+  },
+  {
+    name: "Handcrafted T-Shirts",
+    category: "tshirts",
+    keywords: ["tshirts", "handcrafted", "t-shirts", "tshirt"],
+    price: 1250,
+    oldPrice: 2500,
+    url: "https://rukminim1.flixcart.com/image/832/832/xif0q/t-shirt/c/i/0/xl-half-latter-one-nb-nicky-boy-original-imagmmcsjgufmvdq.jpeg?q=70",
+    _id: 6,
+  },
+  {
+    name: "Solid Shoulder Bag",
+    category: "handbags",
+    keywords: ["handbags", "handbag", "shoulder", "bag", "ladies"],
+    price: 1079,
+    oldPrice: 3599,
+    url: "https://rukminim1.flixcart.com/image/612/612/xif0q/hand-messenger-bag/m/8/m/-original-imagkycgznh78x4g.jpeg?q=70",
+    _id: 7,
+  },
+  {
+    name: "Women Handbag",
+    category: "handbags",
+    keywords: ["handbags", "handbag", "shoulder", "bag", "ladies"],
+    price: 1250,
+    oldPrice: 2500,
+    url: "https://rukminim1.flixcart.com/image/612/612/xif0q/hand-messenger-bag/m/8/t/women-stylish-trendy-collage-lightweight-western-look-hand-bags-original-imagntf6r7hhrnc8.jpeg?q=70",
+    _id: 8,
+  },
+  {
+    name: "Floral Waise Cut-out dress",
+    category: "dresses",
+    keywords: ["dress", "dresses", "floral", "women", "waist", "ladies"],
+    price: 1250,
+    oldPrice: 2500,
+    url: "https://rukminim1.flixcart.com/image/612/612/xif0q/dress/a/4/1/l-emz01634-emeros-original-imagmjptyetek6nx.jpeg?q=70",
+    _id: 9,
+  },
+  {
+    name: "Women printed Midi dress",
+    category: "dresses",
+    keywords: ["dresses", "dress", "midi", "women", "ladies", "printed"],
+    price: 1250,
+    oldPrice: 2500,
+    url: "https://rukminim1.flixcart.com/image/612/612/xif0q/dress/z/s/i/s-a1-zwerlon-original-imagn9uycxbhshur.jpeg?q=70",
+    _id: 10,
+  },
+  {
+    name: "Women Twill Parallel Trousers",
+    category: "trousers",
+    keywords: ["trousers", "trouser", "twill", "parallel", "women", "ladies"],
+
+    price: 1250,
+    oldPrice: 2500,
+    url: "https://rukminim1.flixcart.com/image/612/612/xif0q/trouser/y/9/0/34-kttwomenspant353-kotty-original-imagp8wgzamubj9p.jpeg?q=70",
+    _id: 11,
+  },
+  {
+    name: "Women Trousers",
+    category: "trousers",
+    keywords: ["trousers", "trouser", "women", "ladies"],
+    price: 1250,
+    oldPrice: 2500,
+    url: "https://rukminim1.flixcart.com/image/612/612/xif0q/trouser/y/v/e/32-women-trouser-lupi-foxter-original-imagm99dzsz3fnqy.jpeg?q=70",
+    _id: 12,
   },
 ];
 export { productsList, discountCalc };

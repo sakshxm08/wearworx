@@ -1,4 +1,4 @@
-import React, { useEffect } from "react";
+import React from "react";
 import { ProductCard } from "../components/ProductCard";
 import { Link } from "react-router-dom";
 
@@ -8,10 +8,8 @@ import { HiArrowLeft } from "react-icons/hi";
 
 export const Products = () => {
   const location = useLocation();
-  useEffect(() => {
-    // console.log(location.state.category.toLowerCase());
-  }, []);
   const category = location.state.category.toLowerCase();
+
   const sortedList = [];
   for (let product of productsList) {
     for (let keyword of product.keywords) {
@@ -50,7 +48,13 @@ export const Products = () => {
         <div className="max-w-screen-xl mx-auto grid mobile:grid-cols-2 tablets:grid-cols-3 xl:grid-cols-4 gap-10 py-10 lg:py-20">
           {sortedList.map((item) => (
             <ProductCard
-              key={item._id + "-" + item.name + "-" + item.category}
+              key={
+                item._id +
+                "-" +
+                item.name.replace(" ", "-") +
+                "-" +
+                item.category
+              }
               product={item}
             />
           ))}

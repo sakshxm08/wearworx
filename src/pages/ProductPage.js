@@ -1,29 +1,66 @@
-import React, { useContext } from "react";
+import React, { useContext, useEffect, useState } from "react";
 import { Link, useLocation } from "react-router-dom";
 import { MdOutlineStar } from "react-icons/md";
 import { discountCalc } from "../api/List";
 import { HiArrowRight, HiOutlineShoppingBag } from "react-icons/hi";
 import CartContext from "../context/cartContext";
+import { ToastContainer, toast } from "react-toastify";
+import "react-toastify/dist/ReactToastify.css";
 
 const ProductPage = () => {
   const location = useLocation();
   const product = location.state;
+  // const [repeatIndex, setRepeatIndex] = useState(0);
+  const [i, setI] = useState(0);
+  // useEffect(() => {
+  //   console.log(location.state);
+  // });
 
   const cart = useContext(CartContext);
+  // const addToCart = (product) => {
+  //   let productRepeat = cart.cartArray.find(
+  //     (cartProduct) => cartProduct._id === product._id
+  //   );
+  //   let productRepeatSize;
+  //   if (productRepeat) {
+  //     const findRepeatIndex = cart.cartArray.findIndex(
+  //       (repeatProduct) => repeatProduct._id === productRepeat._id
+  //     );
+  //     productRepeatSize = cart.cartArray.find(
+  //       (Product) => Product.size === cart.cartArray[findRepeatIndex].size
+  //     );
+  //     // findRepeatIndex !== -1 && cart.cartArray.splice(findRepeatIndex, 1);
+  //     // console.log(cart.cartArray);
+  //   }
+  //   console.log(productRepeat);
+  //   console.log(productRepeatSize);
+  //   // console.log(product._id);
+  //   // console.log(cart.qty);
 
-  const addToCart = (product) => {
-    let cartRepeat = cart.cartArray.find(
-      (cartProduct) => cartProduct._id === product._id
-    );
-    if (cartRepeat) {
-      const findRepeatIndex = cart.cartArray.findIndex(
-        (item) => item._id === cartRepeat._id
-      );
-      findRepeatIndex !== -1 && cart.cartArray.splice(findRepeatIndex, 1);
-    }
-    console.log(cart.qty);
+  //   cart.addToCart(
+  //     product._id,
+  //     product.name,
+  //     product.url,
+  //     product.category,
+  //     product.keywords,
+  //     product.oldPrice,
+  //     product.price
+  //   );
+  //   cart.setSize(null);
+  //   // document
+  //   //   .getElementById(`add-to-cart-${product.name}`)
+  //   //   .classList.remove("flex");
+  //   // document
+  //   //   .getElementById(`add-to-cart-${product.name}`)
+  //   //   .classList.add("hidden");
+  //   // document.getElementById(`go-to-cart-${product.name}`).classList.add("flex");
+  //   // document
+  //   //   .getElementById(`go-to-cart-${product.name}`)
+  //   //   .classList.remove("hidden");
+  // };
 
-    cart.addToCart(
+  const addToCart = async (product) => {
+    await cart.addToCart(
       product._id,
       product.name,
       product.url,
@@ -32,7 +69,50 @@ const ProductPage = () => {
       product.oldPrice,
       product.price
     );
-    cart.setSize(null);
+    let repeatProduct = cart.cartArray.find(
+      (prod) => prod._id === product._id && prod.size === cart.size
+    );
+    if (repeatProduct) {
+      // setRepeatIndex(
+      //   cart.cartArray.findIndex(
+      //     (prod) =>
+      //       prod._id === repeatProduct._id && prod.size === repeatProduct.size
+      //   )
+      // );
+
+      // if (cart.size === cart.cartArray[repeatIndex].size) {
+      //   console.log(repeatIndex);
+      // }
+      // console.log(repeatProduct);
+      repeatProduct.qty++;
+      toast.success(
+        "You have this item in your bag and we have increased the quanity by 1",
+        {
+          position: "top-right",
+          autoClose: 3000,
+          hideProgressBar: false,
+          closeOnClick: true,
+          pauseOnHover: true,
+          draggable: true,
+          progress: undefined,
+          theme: "dark",
+          bodyClassName: "text-center text-sm",
+        }
+      );
+    } else {
+      toast.success("Added to cart", {
+        position: "top-right",
+        autoClose: 3000,
+        hideProgressBar: false,
+        closeOnClick: true,
+        pauseOnHover: true,
+        draggable: true,
+        progress: undefined,
+        theme: "dark",
+      });
+    }
+    await cart.setSize(null);
+    setI(i + 1);
     document
       .getElementById(`add-to-cart-${product.name}`)
       .classList.remove("flex");
@@ -44,16 +124,43 @@ const ProductPage = () => {
       .getElementById(`go-to-cart-${product.name}`)
       .classList.remove("hidden");
   };
+
+  const newArray = cart.cartArray.filter(
+    (obj, index) =>
+      index ===
+      cart.cartArray.findIndex(
+        (product) => obj._id === product._id && obj.size === product.size
+      )
+  );
+
+  useEffect(() => {
+    cart.setCartArray(newArray);
+    console.log(newArray, i);
+    // eslint-disable-next-line react-hooks/exhaustive-deps
+  }, [i]);
+
   const onSizeChange = (e) => {
     cart.setSize(e.target.value);
+    document
+      .getElementById(`add-to-cart-${product.name}`)
+      .classList.remove("hidden");
+    document
+      .getElementById(`add-to-cart-${product.name}`)
+      .classList.add("flex");
+    document
+      .getElementById(`go-to-cart-${product.name}`)
+      .classList.add("hidden");
+    document
+      .getElementById(`go-to-cart-${product.name}`)
+      .classList.remove("flex");
   };
 
   return (
-    <div className="flex gap-10 mx-auto my-10 w-11/12">
-      <div className="w-2/5 relative">
+    <div className="flex flex-col md:flex-row gap-10 mx-auto my-10 w-11/12">
+      <div className="w-3/4 mx-auto md:mx-0 mobile:w-1/2 tablets:w-2/5 relative">
         <img
           src={product.url}
-          className="w-full h-[550px] object-contain"
+          className="w-auto h-full tablets:h-[450px] lg:h-[550px]s object-cover tablets:object-contain mx-auto"
           alt=""
         />
         {product.oldPrice && (
@@ -62,10 +169,12 @@ const ProductPage = () => {
           </span>
         )}
       </div>
-      <div className="w-3/5 flex flex-col items-start justify-start">
+      <div className="w-full md:w-1/2 tablets:w-3/5 flex flex-col items-start justify-start">
         <div className="flex flex-col gap-2 items-start justify-start pb-6 border-b-[0.5px] border-b-gray-300 w-full">
-          <h1 className="text-3xl font-bold font-titleFont">{product.name}</h1>
-          <span className="text-lg font-light text-gray-700">
+          <h1 className="tablets:text-xl text-3xl font-bold font-titleFont">
+            {product.name}
+          </h1>
+          <span className="tablets:text-base text-lg font-light text-gray-700">
             {product.category.charAt(0).toUpperCase() +
               product.category.slice(1)}
           </span>
@@ -77,38 +186,40 @@ const ProductPage = () => {
               <MdOutlineStar></MdOutlineStar>
               <MdOutlineStar></MdOutlineStar>
             </div>
-            <span className="text-sm font-light text-gray-500">25 Ratings</span>
+            <span className="tablets:text-xs text-sm font-light text-gray-500">
+              25 Ratings
+            </span>
           </div>
         </div>
         <div className="flex flex-col items-start justify-start gap-4 pt-4">
           <div className="flex flex-col items-start justify-start gap-2">
-            <div className="flex gap-4 items-center">
-              <span className="font-medium text-2xl">
+            <div className="flex flex-wrap gap-4 items-center">
+              <span className="font-medium text-xl ">
                 &#8377;{product.price}
               </span>
               {product.oldPrice && (
                 <>
-                  <span className="font-extralight text-xl text-gray-500">
+                  <span className="font-extralight text-lg  text-gray-500">
                     MRP{" "}
                     <span className="line-through">
                       &#8377;{product.oldPrice}
                     </span>
                   </span>
-                  <span className="text-green-700 text-lg font-medium">
+                  <span className="text-green-700  text-base font-medium">
                     ({discountCalc(product.oldPrice, product.price)}% OFF)
                   </span>
                 </>
               )}
             </div>
-            <div className="text-green-700 text-sm font-medium">
+            <div className="text-green-700 tablets:text-xs text-sm font-medium">
               inclusive of all taxes
             </div>
           </div>
           <div className="py-3 flex flex-col gap-6">
-            <span className="uppercase text-base font-bold tracking-widest">
+            <span className="uppercase tablets:text-sm text-base font-bold tracking-widest">
               Select Size
             </span>
-            <div className="flex gap-3">
+            <div className="gap-3 flex flex-wrap">
               <label htmlFor="xs">
                 <input
                   type="radio"
@@ -201,7 +312,7 @@ const ProductPage = () => {
               </label>
             </div>
           </div>
-          <div className="flex gap-4">
+          <div className="w-full md:w-fit flex">
             {/* <div className="border px-4 py-1 flex gap-4 items-center justify-center text-sm text-gray-500">
               Quantity
               <div className="flex gap-2 items-center justify-center">
@@ -224,7 +335,7 @@ const ProductPage = () => {
                 </span>
               </div>
             </div> */}
-            <div className="flex gap-4">
+            <div className="w-full md:w-fit flex flex-col">
               <button
                 onClick={() => {
                   if (cart.size !== null) {
@@ -234,15 +345,15 @@ const ProductPage = () => {
                   }
                 }}
                 id={`add-to-cart-${product.name}`}
-                className="w-80 font-titleFont flex items-center justify-center gap-2 font-medium hover:bg-green-700 duration-200 cursor-pointer tracking-wider text-base bg-green-600 text-white py-3 rounded"
+                className="w-full mobile:w-80 font-titleFont flex items-center justify-center gap-2 font-medium hover:bg-green-700 duration-200 cursor-pointer tracking-wider text-base bg-green-600 text-white py-3 rounded"
               >
                 <HiOutlineShoppingBag className="text-xl"></HiOutlineShoppingBag>{" "}
                 Add to Cart
               </button>
-              <Link to="/cart">
+              <Link to="/cart" className="w-full">
                 <button
                   id={`go-to-cart-${product.name}`}
-                  className=" w-80 hidden font-titleFont  items-center justify-center gap-2 font-medium hover:bg-green-700 duration-200 cursor-pointer tracking-wider text-base bg-green-600 text-white py-3 rounded"
+                  className=" w-full mobile:w-80 hidden font-titleFont  items-center justify-center gap-2 font-medium hover:bg-green-700 duration-200 cursor-pointer tracking-wider text-base bg-green-600 text-white py-3 rounded"
                 >
                   Go to Cart <HiArrowRight className="text-xl" />
                 </button>
@@ -251,6 +362,7 @@ const ProductPage = () => {
           </div>
         </div>
       </div>
+      <ToastContainer style={{ top: "100px" }} />
     </div>
   );
 };

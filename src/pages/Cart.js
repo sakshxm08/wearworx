@@ -18,7 +18,7 @@ export const Cart = () => {
     <div>
       {cartArray.length ? (
         <div className="w-11/12 lg:w-4/5 flex mx-auto lg:flex-row flex-col">
-          <div className="w-full lg:w-2/3 flex flex-col gap-4 px-6 lg:border-r lg:border-r-gray-300 py-8 ">
+          <div className="w-full lg:w-2/3 flex flex-col gap-4 mobile:px-6 lg:border-r lg:border-r-gray-300 py-8 ">
             <div className="border py-4 px-3 flex justify-between items-center w-full rounded-sm text-xs font-medium">
               <span>Check delivery time & services</span>
               <span className="border border-green-600 text-green-600 px-1 tablets:px-3 py-1 tablets:py-2 uppercase text-[10px] tablets:text-xs hover:bg-green-100 duration-200 cursor-pointer rounded-sm">
@@ -28,7 +28,7 @@ export const Cart = () => {
             {cartArray.length ? (
               cartArray.map((item) => (
                 <CartItem
-                  key={item._id + "-" + item.name + "-" + item.category}
+                  key={item._id + "-" + item.name + "-" + item.size}
                   product={item}
                 />
               ))
