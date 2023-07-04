@@ -130,7 +130,7 @@ export const CartItem = ({ product }) => {
                 <span
                   onClick={() => {
                     // product.qty = product.qty === 1 ? 1 : product.qty--;
-                    setQuantity(1 ? 1 : quanity - 1);
+                    setQuantity(quanity === 1 ? 1 : quanity - 1);
 
                     // cart.setQty(cart.qty === 1 ? 1 : cart.qty - 1);
                   }}
