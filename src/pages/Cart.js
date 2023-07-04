@@ -21,9 +21,9 @@ export const Cart = () => {
           <div className="w-full lg:w-2/3 flex flex-col gap-4 mobile:px-6 lg:border-r lg:border-r-gray-300 py-8 ">
             <div className="border py-4 px-3 flex justify-between items-center w-full rounded-sm text-xs font-medium">
               <span>Check delivery time & services</span>
-              <span className="border border-green-600 text-green-600 px-1 tablets:px-3 py-1 tablets:py-2 uppercase text-[10px] tablets:text-xs hover:bg-green-100 duration-200 cursor-pointer rounded-sm">
+              <button className="border border-green-600 text-green-600 px-1 tablets:px-3 py-1 tablets:py-2 uppercase text-[10px] tablets:text-xs hover:bg-green-100 active:scale-95 duration-200 cursor-pointer rounded-sm">
                 Enter pin code
-              </span>
+              </button>
             </div>
             {cartArray.length ? (
               cartArray.map((item) => (
@@ -36,9 +36,9 @@ export const Cart = () => {
               <>
                 <div className="mx-auto">No Items in Cart</div>
                 <Link to="/" className="mx-auto mb-4">
-                  <span className=" mx-auto border border-green-600 text-green-600 px-3 py-2 uppercase text-xs  hover:bg-green-100 duration-200 cursor-pointer rounded-sm">
+                  <button className="active:scale-95 mx-auto border border-green-600 text-green-600 px-3 py-2 uppercase text-xs  hover:bg-green-100 duration-200 cursor-pointer rounded-sm">
                     Add Items to Cart
-                  </span>
+                  </button>
                 </Link>
               </>
             )}
@@ -51,9 +51,9 @@ export const Cart = () => {
                 />
                 <span>Login to see items from your existing bag.</span>
               </span>
-              <span className="mobile:w-fit w-2/3 text-center border border-green-600 text-green-600 px-1 tablets:px-3 py-1 tablets:py-2 uppercase text-[10px] tablets:text-xs hover:bg-green-100 duration-200 cursor-pointer rounded-sm">
+              <button className="active:scale-95 mobile:w-fit w-2/3 text-center border border-green-600 text-green-600 px-1 tablets:px-3 py-1 tablets:py-2 uppercase text-[10px] tablets:text-xs hover:bg-green-100 duration-200 cursor-pointer rounded-sm">
                 login now
-              </span>
+              </button>
             </div>
           </div>
           <div className="py-8 flex flex-col gap-4 px-6 w-full lg:w-1/3">
@@ -74,9 +74,9 @@ export const Cart = () => {
             </div>
           </div>
           <Link to="/" className="mx-auto mb-4">
-            <span className=" mx-auto border border-green-600 text-green-600 px-3 py-2 uppercase text-xs  hover:bg-green-100 duration-200 cursor-pointer rounded-sm">
+            <button className="active:scale-95 mx-auto border border-green-600 text-green-600 px-3 py-2 uppercase text-xs  hover:bg-green-100 duration-200 cursor-pointer rounded-sm">
               Add Items to Cart
-            </span>
+            </button>
           </Link>
         </div>
       )}

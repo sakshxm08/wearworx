@@ -8,6 +8,7 @@ import Modal from "react-modal";
 
 export const CartItem = ({ product }) => {
   const [qtyModalOpen, setQtyModalOpen] = useState(false);
+  const [removeModalOpen, setRemoveModalOpen] = useState(false);
   const cart = useContext(CartContext);
   let [quanity, setQuantity] = useState(product.qty);
   const removeItem = (arr, product) => {
@@ -80,7 +81,9 @@ export const CartItem = ({ product }) => {
           </div>
           <div
             className="absolute top-2 right-2 mobile:top-4 mobile:right-4 cursor-pointer"
-            onClick={() => removeItem(cart.cartArray, product)}
+            onClick={() => {
+              setRemoveModalOpen(true);
+            }}
           >
             <RxCross1 className="text-lg text-black"></RxCross1>
           </div>
@@ -180,6 +183,47 @@ export const CartItem = ({ product }) => {
             className="absolute top-6 right-6 cursor-pointer"
           >
             <RxCross1 className="text-lg text-black"></RxCross1>
+          </div>
+        </Modal>
+      </div>
+      <div className="absolute flex justify-center items-center w-fit h-fit">
+        <Modal
+          isOpen={removeModalOpen}
+          onRequestClose={() => setRemoveModalOpen(false)}
+          className="absolute rounded w-fit h-fit bg-[#f1f1f1] pt-4 pb-3 px-6  left-0 right-0 mx-auto top-1/2 -translate-y-1/2"
+          overlayClassName="bg-[#0000007c] fixed inset-0 z-50"
+        >
+          <div className="flex flex-col gap-2">
+            <div className="flex gap-4">
+              <div className="w-12 object-cover flex items-center justify-center">
+                <img src={product.url} alt="" />
+              </div>
+              <div className="text-sm flex flex-col gap-1">
+                <h4 className="font-semibold">Move item from Cart?</h4>
+                <span className="w-60 text-xs">
+                  Are you sure you want to remove this item from cart?
+                </span>
+              </div>
+            </div>
+            <div className="pt-3 border-t border-t-gray-300 text-[10px] grid grid-cols-2 text-center">
+              <span
+                className="font-medium cursor-pointer border-r border-r-gray-300"
+                onClick={() => removeItem(cart.cartArray, product)}
+              >
+                REMOVE
+              </span>
+              <span className="font-medium cursor-pointer text-green-600">
+                MOVE TO FAVORITES
+              </span>
+            </div>
+          </div>
+          <div
+            onClick={() => {
+              setRemoveModalOpen(false);
+            }}
+            className="absolute top-2 right-2 cursor-pointer duration-200 active:scale-95"
+          >
+            <RxCross1 className="text-sm text-black"></RxCross1>
           </div>
         </Modal>
       </div>
