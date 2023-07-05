@@ -1,16 +1,19 @@
-import React from "react";
+import React, { useContext } from "react";
 
 // import CartContext from "../context/cartContext";
 
 import { useNavigate } from "react-router-dom";
 import { discountCalc } from "../api/List";
 import { HiHeart } from "react-icons/hi";
+import FavContext from "../context/favContext";
+import { toast } from "react-toastify";
+import "react-toastify/dist/ReactToastify.css";
 
 export const ProductCard = ({ product }) => {
   const navigate = useNavigate();
   const openProduct = () => {
     navigate(
-      `./product/${product.name
+      `../${product.name
         .toLowerCase()
         .split(" ")
         .join("")
@@ -18,6 +21,39 @@ export const ProductCard = ({ product }) => {
         .join("")}`,
       { state: product, replace: true }
     );
+  };
+  const fav = useContext(FavContext);
+
+  const addToFav = () => {
+    if (!fav.favArray.find((item) => item === product)) {
+      fav.addToFav(product);
+      toast.success("Added to Favorites", {
+        toastId: `${product._id}-${product.name}`,
+        position: "top-right",
+        autoClose: 2000,
+        hideProgressBar: false,
+        closeOnClick: true,
+        pauseOnHover: true,
+        draggable: true,
+        progress: undefined,
+        theme: "dark",
+        bodyClassName: "text-sm font-titleFont",
+      });
+    } else {
+      toast.info("Already in Favorites", {
+        toastId: `${product._id}-${product.name}`,
+
+        position: "top-right",
+        autoClose: 2000,
+        hideProgressBar: false,
+        closeOnClick: true,
+        pauseOnHover: true,
+        draggable: true,
+        progress: undefined,
+        theme: "dark",
+        bodyClassName: "text-base font-titleFont",
+      });
+    }
   };
   // const cart = useContext(CartContext);
 
@@ -75,14 +111,12 @@ export const ProductCard = ({ product }) => {
           </div>
         </div>
         <span
-          // onClick={() => {
-          //   addToCart(product);
-          // }}
-          className="bottom-2 text-xs border invisible tablets:visible text-gray-500 hover:bg-gray-200 px-[2px] py-[2px] h-fit   hover:text-gray-900 absolute transform cursor-pointer translate-x-72 w-[120px] flex gap-1 items-center justify-center transition-transform group-hover:translate-x-36 duration-500"
+          onClick={addToFav}
+          className="bottom-2 text-xs border  text-gray-500 right-2 hover:bg-gray-200 px-[2px] py-[2px] h-fit   hover:text-gray-900 absolute transform cursor-pointer tablets:translate-x-72 w-[120px] flex gap-1 items-center justify-center transition-transform group-hover:translate-x-0 duration-300"
         >
           add to favorites <HiHeart />
         </span>
-        <span className="bottom-2 absolute text-xs border text-gray-500 active:bg-gray-200 px-[2px] h-fit active:text-gray-900 right-2 flex items-center justify-center gap-1"></span>
+
         <div className="text-xs font-light mt-1">
           {product.category.charAt(0).toUpperCase() + product.category.slice(1)}
         </div>

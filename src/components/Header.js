@@ -1,5 +1,5 @@
 import React, { useContext, useEffect, useState } from "react";
-import { cart, logoText, user } from "../assets";
+import { cart, fav, logoText, user } from "../assets";
 import { Link } from "react-router-dom";
 import CartContext from "../context/cartContext";
 export const Header = () => {
@@ -94,31 +94,49 @@ export const Header = () => {
               <li>Blog</li>
             </Link>
           </ul>
-          <Link
-            to="../cart"
-            className="h-full flex justify-center items-center group"
-          >
-            <div className="relative flex items-end justify-center text-base gap-2 cursor-pointer">
-              <img src={cart} className="w-7" alt="cart" />
-              <span>{cartQty}</span>
-              <div className="hidden group-hover:flex bg-gray-800 text-white rounded absolute text-[10px] -bottom-10 w-max px-2 py-[1px]">
-                View Cart
+          <div className="flex gap-6 items-center justify-center">
+            <Link
+              to="../cart"
+              className="h-full flex justify-center items-center group"
+            >
+              <div className="relative flex items-end justify-center text-base gap-1 cursor-pointer">
+                <img src={cart} className="w-6" alt="cart" />
+                <span>{cartQty}</span>
+                <div className="hidden group-hover:flex bg-gray-800 text-white rounded absolute text-[10px] -bottom-10 w-max px-2 py-[1px]">
+                  View Cart
+                </div>
               </div>
+            </Link>
+            <Link
+              to="../favorites"
+              className="h-full flex justify-center items-center group"
+            >
+              <div className="relative flex items-end justify-center text-base gap-2 cursor-pointer">
+                <img src={fav} className="w-5" alt="cart" />
+                <div className="hidden group-hover:flex bg-gray-800 text-white rounded absolute text-[10px] -bottom-10 w-max px-2 py-[1px]">
+                  View Favorites
+                </div>
+              </div>
+            </Link>
+            <div>
+              <img src={user} className="w-6" alt="cart" />
             </div>
-          </Link>
-          <div>
-            <img src={user} className="w-7" alt="cart" />
           </div>
         </div>
         <div className="flex tablets:hidden gap-4">
           <Link to="../cart">
-            <div className="relative flex items-end justify-center text-sm gap-2">
-              <img src={cart} className="w-6 h-auto" alt="cart" />
+            <div className="relative flex items-end justify-center text-sm gap-1">
+              <img src={cart} className="w-4 h-auto" alt="cart" />
               <span>{cartQty}</span>
             </div>
           </Link>
+          <Link to="../favorites">
+            <div className="relative flex items-end justify-center text-sm gap-2">
+              <img src={fav} className="w-4 h-auto" alt="cart" />
+            </div>
+          </Link>
           <span className="flex">
-            <img src={user} alt="" className="w-6 h-auto" />
+            <img src={user} alt="" className="w-4 h-auto" />
           </span>
         </div>
       </div>

@@ -5,8 +5,11 @@ import { RxCross1 } from "react-icons/rx";
 import CartContext from "../context/cartContext";
 
 import Modal from "react-modal";
+import { toast } from "react-toastify";
+import FavContext from "../context/favContext";
 
 export const CartItem = ({ product }) => {
+  const fav = useContext(FavContext);
   const [qtyModalOpen, setQtyModalOpen] = useState(false);
   const [removeModalOpen, setRemoveModalOpen] = useState(false);
   const cart = useContext(CartContext);
@@ -14,6 +17,38 @@ export const CartItem = ({ product }) => {
   const removeItem = (arr, product) => {
     cart.setCartArray(arr.filter((prod) => prod !== product));
     console.log(arr);
+  };
+  const addToFav = (product) => {
+    if (!fav.favArray.find((item) => item._id === product._id)) {
+      fav.addToFav(product);
+      toast.success("Added to Favorites. Removed from Cart", {
+        toastId: `${product._id}-${product.name}`,
+        position: "top-right",
+        autoClose: 2000,
+        hideProgressBar: false,
+        closeOnClick: true,
+        pauseOnHover: true,
+        draggable: true,
+        progress: undefined,
+        theme: "dark",
+        bodyClassName: "text-xs font-titleFont",
+      });
+    } else {
+      toast.info("Already in Favorites. Removed From Cart", {
+        toastId: `${product._id}-${product.name}`,
+
+        position: "top-right",
+        autoClose: 2000,
+        hideProgressBar: false,
+        closeOnClick: true,
+        pauseOnHover: true,
+        draggable: true,
+        progress: undefined,
+        theme: "dark",
+        bodyClassName: "text-xs font-titleFont",
+      });
+    }
+    removeItem(cart.cartArray, product);
   };
   return (
     <>
@@ -200,19 +235,24 @@ export const CartItem = ({ product }) => {
               </div>
               <div className="text-sm flex flex-col gap-1">
                 <h4 className="font-semibold">Move item from Cart?</h4>
-                <span className="w-60 text-xs">
+                <span className=" w-40 mobile:w-60 text-xs">
                   Are you sure you want to remove this item from cart?
                 </span>
               </div>
             </div>
-            <div className="pt-3 border-t border-t-gray-300 text-[10px] grid grid-cols-2 text-center">
+            <div className="pt-3 mobile:border-t border-t-gray-300 text-[10px] grid grid-cols-1 gap-2 mobile:gap-0 mobile:grid-cols-2 text-center">
               <span
                 className="font-medium cursor-pointer border-r border-r-gray-300"
                 onClick={() => removeItem(cart.cartArray, product)}
               >
                 REMOVE
               </span>
-              <span className="font-medium cursor-pointer text-green-600">
+              <span
+                onClick={() => {
+                  addToFav(product);
+                }}
+                className="font-medium cursor-pointer text-green-600"
+              >
                 MOVE TO FAVORITES
               </span>
             </div>

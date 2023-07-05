@@ -14,6 +14,9 @@ import { CartProvider } from "./context/CartProvider";
 import { Products } from "./pages/Products";
 import ProductPage from "./pages/ProductPage";
 import { NotFound } from "./pages/NotFound";
+import { FavProvider } from "./context/FavProvider";
+import { ToastContainer } from "react-toastify";
+import { Favorites } from "./pages/Favorites";
 
 const Layout = () => {
   return (
@@ -36,8 +39,9 @@ const router = createBrowserRouter([
         element: <Home />,
       },
       { path: "/cart", element: <Cart /> },
+      { path: "/favorites", element: <Favorites /> },
       { path: "/products/:id", element: <Products /> },
-      { path: "/products/:category/product/:id", element: <ProductPage /> },
+      { path: "/:id", element: <ProductPage /> },
       { path: "*", element: <NotFound /> },
     ],
   },
@@ -46,11 +50,16 @@ const router = createBrowserRouter([
 function App() {
   // firebaseTry();
   return (
-    <CartProvider>
-      <div className="font-bodyFont">
-        <RouterProvider router={router} />
-      </div>
-    </CartProvider>
+    <>
+      <FavProvider>
+        <CartProvider>
+          <div className="font-bodyFont">
+            <RouterProvider router={router} />
+          </div>
+        </CartProvider>
+      </FavProvider>
+      <ToastContainer style={{ top: "100px" }} />
+    </>
   );
 }
 

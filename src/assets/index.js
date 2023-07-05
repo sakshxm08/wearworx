@@ -18,6 +18,7 @@ import trousers from "./categories/trousers.jpeg";
 import dresses from "./categories/dresses.jpeg";
 import blurredProduct from "./products-blurred.webp";
 import emptyCart from "./empty-cart.png";
+import fav from "./Fav.png";
 export {
   logoText,
   logoLightText,
@@ -39,4 +40,5 @@ export {
   dresses,
   blurredProduct,
   emptyCart,
+  fav,
 };

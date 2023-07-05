@@ -12,6 +12,7 @@ const productsList = [
     url: "https://cdn.shopify.com/s/files/1/0637/4834/1981/products/pista-green-lakhnawi-work-rayon-kurti-peachmode-4.jpg?v=1669040711",
     _id: 1,
   },
+
   {
     name: "Red Colored Kurti",
     category: "kurti",

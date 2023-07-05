@@ -2,63 +2,19 @@ import React, { useContext, useEffect, useState } from "react";
 import { Link, useLocation } from "react-router-dom";
 import { MdOutlineStar } from "react-icons/md";
 import { discountCalc } from "../api/List";
-import { HiArrowRight, HiOutlineShoppingBag } from "react-icons/hi";
+import { HiArrowRight, HiHeart, HiOutlineShoppingBag } from "react-icons/hi";
 import CartContext from "../context/cartContext";
-import { ToastContainer, toast } from "react-toastify";
+import { toast } from "react-toastify";
 import "react-toastify/dist/ReactToastify.css";
+import FavContext from "../context/favContext";
 
 const ProductPage = () => {
   const location = useLocation();
   const product = location.state;
-  // const [repeatIndex, setRepeatIndex] = useState(0);
   const [i, setI] = useState(0);
-  // useEffect(() => {
-  //   console.log(location.state);
-  // });
 
   const cart = useContext(CartContext);
-  // const addToCart = (product) => {
-  //   let productRepeat = cart.cartArray.find(
-  //     (cartProduct) => cartProduct._id === product._id
-  //   );
-  //   let productRepeatSize;
-  //   if (productRepeat) {
-  //     const findRepeatIndex = cart.cartArray.findIndex(
-  //       (repeatProduct) => repeatProduct._id === productRepeat._id
-  //     );
-  //     productRepeatSize = cart.cartArray.find(
-  //       (Product) => Product.size === cart.cartArray[findRepeatIndex].size
-  //     );
-  //     // findRepeatIndex !== -1 && cart.cartArray.splice(findRepeatIndex, 1);
-  //     // console.log(cart.cartArray);
-  //   }
-  //   console.log(productRepeat);
-  //   console.log(productRepeatSize);
-  //   // console.log(product._id);
-  //   // console.log(cart.qty);
-
-  //   cart.addToCart(
-  //     product._id,
-  //     product.name,
-  //     product.url,
-  //     product.category,
-  //     product.keywords,
-  //     product.oldPrice,
-  //     product.price
-  //   );
-  //   cart.setSize(null);
-  //   // document
-  //   //   .getElementById(`add-to-cart-${product.name}`)
-  //   //   .classList.remove("flex");
-  //   // document
-  //   //   .getElementById(`add-to-cart-${product.name}`)
-  //   //   .classList.add("hidden");
-  //   // document.getElementById(`go-to-cart-${product.name}`).classList.add("flex");
-  //   // document
-  //   //   .getElementById(`go-to-cart-${product.name}`)
-  //   //   .classList.remove("hidden");
-  // };
-
+  const fav = useContext(FavContext);
   const addToCart = async (product) => {
     await cart.addToCart(
       product._id,
@@ -73,17 +29,6 @@ const ProductPage = () => {
       (prod) => prod._id === product._id && prod.size === cart.size
     );
     if (repeatProduct) {
-      // setRepeatIndex(
-      //   cart.cartArray.findIndex(
-      //     (prod) =>
-      //       prod._id === repeatProduct._id && prod.size === repeatProduct.size
-      //   )
-      // );
-
-      // if (cart.size === cart.cartArray[repeatIndex].size) {
-      //   console.log(repeatIndex);
-      // }
-      // console.log(repeatProduct);
       repeatProduct.qty++;
       toast.success(
         "You have this item in your bag and we have increased the quanity by 1",
@@ -96,7 +41,7 @@ const ProductPage = () => {
           draggable: true,
           progress: undefined,
           theme: "dark",
-          bodyClassName: "text-center text-sm",
+          bodyClassName: "text-xs font-bodyFont",
         }
       );
     } else {
@@ -109,6 +54,7 @@ const ProductPage = () => {
         draggable: true,
         progress: undefined,
         theme: "dark",
+        bodyClassName: "font-titleFont",
       });
     }
     await cart.setSize(null);
@@ -154,7 +100,37 @@ const ProductPage = () => {
       .getElementById(`go-to-cart-${product.name}`)
       .classList.remove("flex");
   };
+  const addToFav = () => {
+    if (!fav.favArray.find((item) => item === product)) {
+      fav.addToFav(product);
+      toast.success("Added to Favorites", {
+        toastId: `${product._id}-${product.name}`,
+        position: "top-right",
+        autoClose: 2000,
+        hideProgressBar: false,
+        closeOnClick: true,
+        pauseOnHover: true,
+        draggable: true,
+        progress: undefined,
+        theme: "dark",
+        bodyClassName: "text-sm font-titleFont",
+      });
+    } else {
+      toast.info("Already in Favorites", {
+        toastId: `${product._id}-${product.name}`,
 
+        position: "top-right",
+        autoClose: 2000,
+        hideProgressBar: false,
+        closeOnClick: true,
+        pauseOnHover: true,
+        draggable: true,
+        progress: undefined,
+        theme: "dark",
+        bodyClassName: "text-base font-titleFont",
+      });
+    }
+  };
   return (
     <div className="flex flex-col md:flex-row gap-10 mx-auto my-10 w-11/12">
       <div className="w-3/4 mx-auto md:mx-0 mobile:w-1/2 tablets:w-2/5 relative">
@@ -312,30 +288,8 @@ const ProductPage = () => {
               </label>
             </div>
           </div>
-          <div className="w-full md:w-fit flex">
-            {/* <div className="border px-4 py-1 flex gap-4 items-center justify-center text-sm text-gray-500">
-              Quantity
-              <div className="flex gap-2 items-center justify-center">
-                <span
-                  onClick={() => {
-                    cart.setQty(cart.qty === 1 ? 1 : cart.qty - 1);
-                  }}
-                  className="px-2 select-none border text-sm hover:bg-gray-600 hover:border-gray-600 cursor-pointer hover:text-white duration-200"
-                >
-                  -
-                </span>
-                <span className="w-6 text-center">{cart.qty}</span>
-                <span
-                  onClick={() => {
-                    cart.setQty(cart.qty + 1);
-                  }}
-                  className=" px-2 select-none border text-sm hover:bg-gray-600 hover:border-gray-600 cursor-pointer hover:text-white duration-200"
-                >
-                  +
-                </span>
-              </div>
-            </div> */}
-            <div className="w-full md:w-fit flex flex-col">
+          <div className="w-full flex flex-row md:flex-col lg:flex-row gap-2 mobile:gap-4">
+            <div className="w-1/2 md:w-fit flex flex-col">
               <button
                 onClick={() => {
                   if (cart.size !== null) {
@@ -345,24 +299,34 @@ const ProductPage = () => {
                   }
                 }}
                 id={`add-to-cart-${product.name}`}
-                className="w-full mobile:w-80 font-titleFont flex items-center justify-center gap-2 font-medium hover:bg-green-700 duration-200 cursor-pointer tracking-wider text-base bg-green-600 text-white py-3 rounded"
+                className="w-full mobile:w-80 font-titleFont flex items-center justify-center gap-2 font-medium hover:bg-green-700 duration-200 cursor-pointer tracking-wider text-sm md:text-base bg-green-600 text-white py-3 rounded border border-green-600"
               >
-                <HiOutlineShoppingBag className="text-xl"></HiOutlineShoppingBag>{" "}
+                <HiOutlineShoppingBag className="text-lg md:text-xl"></HiOutlineShoppingBag>{" "}
                 Add to Cart
               </button>
               <Link to="/cart" className="w-full">
                 <button
                   id={`go-to-cart-${product.name}`}
-                  className=" w-full mobile:w-80 hidden font-titleFont  items-center justify-center gap-2 font-medium hover:bg-green-700 duration-200 cursor-pointer tracking-wider text-base bg-green-600 text-white py-3 rounded"
+                  className=" w-full mobile:w-80 hidden font-titleFont  items-center justify-center gap-2 font-medium hover:bg-green-700 duration-200 cursor-pointer tracking-wider text-sm md:text-base bg-green-600 text-white py-3 rounded border border-green-600"
                 >
-                  Go to Cart <HiArrowRight className="text-xl" />
+                  Go to Cart <HiArrowRight className="text-lg md:text-xl" />
                 </button>
               </Link>
+            </div>
+            <div className="w-1/2 md:w-fit">
+              <button
+                onClick={() => {
+                  addToFav();
+                }}
+                className="w-full mobile:w-80 tablets:w-56 font-titleFont flex items-center justify-center gap-2 font-medium hover:bg-green-100 duration-200 cursor-pointer tracking-wider text-xs md:text-base bg-white text-green-600 border border-green-600 py-3 rounded"
+              >
+                <HiHeart className=" md:text-xl text-lg"></HiHeart>
+                Move to Favorites
+              </button>
             </div>
           </div>
         </div>
       </div>
-      <ToastContainer style={{ top: "100px" }} />
     </div>
   );
 };

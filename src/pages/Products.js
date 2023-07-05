@@ -37,12 +37,6 @@ export const Products = () => {
           {category.toUpperCase()}
         </h1>
         <span className="w-20 h-[3px] bg-black"></span>
-        <p className="max-w-[720px] text-gray-700 text-center text-sm lg:text-base">
-          Lorem ipsum dolor sit amet consectetur adipisicing elit. Illo,
-          sapiente libero ea illum a, mollitia aut accusamus facilis et facere
-          provident ipsum impedit ratione vel reprehenderit magni nostrum quos
-          consequuntur.
-        </p>
       </div>
       {sortedList.length ? (
         <div className="max-w-screen-xl mx-auto grid mobile:grid-cols-2 tablets:grid-cols-3 xl:grid-cols-4 gap-10 py-10 lg:py-20">
