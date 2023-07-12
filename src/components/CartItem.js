@@ -7,13 +7,13 @@ import CartContext from "../context/cartContext";
 import Modal from "react-modal";
 import { toast } from "react-toastify";
 import FavContext from "../context/favContext";
-import UserContext from "../context/userContext";
+// import UserContext from "../context/userContext";
 // import { addUser } from "../firebase/Firebase";
 
 export const CartItem = ({ product }) => {
   // CONTEXTS
   const fav = useContext(FavContext);
-  const auth = useContext(UserContext);
+  // const auth = useContext(UserContext);
   const cart = useContext(CartContext);
 
   // MODALS
