@@ -15,7 +15,7 @@ export const FavItem = ({ product }) => {
         .join("")
         .split("-")
         .join("")}`,
-      { state: product, replace: true }
+      { state: product, replace: false }
     );
   };
   const fav = useContext(FavContext);

@@ -7,8 +7,12 @@ import CartContext from "../context/cartContext";
 import { toast } from "react-toastify";
 import "react-toastify/dist/ReactToastify.css";
 import FavContext from "../context/favContext";
+// import { addUser, getCartData } from "../firebase/Firebase";
+import UserContext from "../context/userContext";
 
 const ProductPage = () => {
+  const auth = useContext(UserContext);
+
   const location = useLocation();
   const product = location.state;
   const [i, setI] = useState(0);
@@ -82,6 +86,10 @@ const ProductPage = () => {
   useEffect(() => {
     cart.setCartArray(newArray);
     console.log(newArray, i);
+    if (auth.user) {
+      // addUser(auth.user, newArray, fav.favArray);
+    }
+    console.log(fav.favArray, i);
     // eslint-disable-next-line react-hooks/exhaustive-deps
   }, [i]);
 
@@ -103,6 +111,8 @@ const ProductPage = () => {
   const addToFav = () => {
     if (!fav.favArray.find((item) => item === product)) {
       fav.addToFav(product);
+      setI(i + 1);
+
       toast.success("Added to Favorites", {
         toastId: `${product._id}-${product.name}`,
         position: "top-right",
@@ -131,6 +141,7 @@ const ProductPage = () => {
       });
     }
   };
+
   return (
     <div className="flex flex-col md:flex-row gap-10 mx-auto my-10 w-11/12">
       <div className="w-3/4 mx-auto md:mx-0 mobile:w-1/2 tablets:w-2/5 relative">
@@ -316,7 +327,10 @@ const ProductPage = () => {
             <div className="w-1/2 md:w-fit">
               <button
                 onClick={() => {
-                  addToFav();
+                  if (auth.user) {
+                    addToFav();
+                    // addUser(auth.user, newArray, fav.favArray);
+                  } else alert("Login to Continue");
                 }}
                 className="w-full mobile:w-80 tablets:w-56 font-titleFont flex items-center justify-center gap-2 font-medium hover:bg-green-100 duration-200 cursor-pointer tracking-wider text-xs md:text-base bg-white text-green-600 border border-green-600 py-3 rounded"
               >
@@ -324,6 +338,20 @@ const ProductPage = () => {
                 Move to Favorites
               </button>
             </div>
+            <button
+              onClick={() => {
+                // addUser(auth.user, newArray, fav.favArray);
+              }}
+            >
+              ADD
+            </button>
+            <button
+              onClick={() => {
+                // getCartData(auth.user);
+              }}
+            >
+              VIEW DATA
+            </button>
           </div>
         </div>
       </div>

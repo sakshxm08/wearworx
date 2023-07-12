@@ -2,7 +2,7 @@ import logoText from "./logo-with-text.png";
 import logoLightText from "./logo-with-text-light.png";
 import logo from "./logo.png";
 import cart from "./cart.png";
-import user from "./user.png";
+import userImg from "./user.png";
 import banner1 from "./banner/1.png";
 import banner2 from "./banner/2.png";
 import banner3 from "./banner/3.png";
@@ -19,12 +19,17 @@ import dresses from "./categories/dresses.jpeg";
 import blurredProduct from "./products-blurred.webp";
 import emptyCart from "./empty-cart.png";
 import fav from "./Fav.png";
+import google from "./google.png";
+import login from "./login.png";
+import github from "./github.png";
+import signup from "./signup.png";
+import reset from "./reset-pass.png";
 export {
   logoText,
   logoLightText,
   logo,
   cart,
-  user,
+  userImg,
   banner1,
   banner2,
   banner3,
@@ -41,4 +46,9 @@ export {
   blurredProduct,
   emptyCart,
   fav,
+  google,
+  login,
+  github,
+  signup,
+  reset,
 };

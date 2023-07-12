@@ -7,17 +7,34 @@ import CartContext from "../context/cartContext";
 import Modal from "react-modal";
 import { toast } from "react-toastify";
 import FavContext from "../context/favContext";
+import UserContext from "../context/userContext";
+// import { addUser } from "../firebase/Firebase";
 
 export const CartItem = ({ product }) => {
+  // CONTEXTS
   const fav = useContext(FavContext);
+  const auth = useContext(UserContext);
+  const cart = useContext(CartContext);
+
+  // MODALS
   const [qtyModalOpen, setQtyModalOpen] = useState(false);
   const [removeModalOpen, setRemoveModalOpen] = useState(false);
-  const cart = useContext(CartContext);
-  let [quanity, setQuantity] = useState(product.qty);
+  const [quanity, setQuantity] = useState(product.qty);
+
+  // REMOVE ITEMS
   const removeItem = (arr, product) => {
     cart.setCartArray(arr.filter((prod) => prod !== product));
     console.log(arr);
+    // if (auth.user) {
+    //   addUser(
+    //     auth.user,
+    //     arr.filter((prod) => prod !== product),
+    //     fav.favArray
+    //   );
+    // }
   };
+
+  // ADD TO FAVORITES
   const addToFav = (product) => {
     if (!fav.favArray.find((item) => item._id === product._id)) {
       fav.addToFav(product);
@@ -194,10 +211,11 @@ export const CartItem = ({ product }) => {
               onClick={() => {
                 setQtyModalOpen(false);
                 // product.qty = cart.qty;
-                cart.setQty(quanity + product.qty);
+                // cart.setQty(quanity + product.qty);
 
                 product.qty = quanity;
                 console.log(cart.cartArray, cart.qty);
+                // addUser(auth.user, cart.cartArray, fav.favArray);
                 // cart.setQty(cart.qty);
               }}
               className="w-full bg-green-600 rounded-sm text-white uppercase tracking-widest text-xs py-3 mt-3 font-medium hover:bg-green-700 active:bg-green-900 duration-200"
@@ -210,10 +228,11 @@ export const CartItem = ({ product }) => {
               // cart.setQty(1);
               setQtyModalOpen(false);
               // product.qty = cart.qty;
-              cart.setQty(quanity + product.qty);
+              // cart.setQty(quanity + product.qty);
 
               product.qty = quanity;
               console.log(cart.cartArray, cart.qty);
+              // addUser(auth.user, cart.cartArray, fav.favArray);
             }}
             className="absolute top-6 right-6 cursor-pointer"
           >

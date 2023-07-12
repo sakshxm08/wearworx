@@ -19,7 +19,7 @@ export const ProductCard = ({ product }) => {
         .join("")
         .split("-")
         .join("")}`,
-      { state: product, replace: true }
+      { state: product, replace: false }
     );
   };
   const fav = useContext(FavContext);
@@ -84,8 +84,8 @@ export const ProductCard = ({ product }) => {
   // }, [cart.cartArray]);
 
   return (
-    <div className="group relative cursor-pointer">
-      <div className="w-full h-80 overflow-hidden  " onClick={openProduct}>
+    <div className="group relative cursor-pointer" onClick={openProduct}>
+      <div className="w-full h-80 overflow-hidden  ">
         <img
           className="object-cover w-full h-full group-hover:scale-110 duration-500"
           src={product.url}
@@ -112,7 +112,7 @@ export const ProductCard = ({ product }) => {
         </div>
         <span
           onClick={addToFav}
-          className="bottom-2 text-xs border  text-gray-500 right-2 hover:bg-gray-200 px-[2px] py-[2px] h-fit   hover:text-gray-900 absolute transform cursor-pointer tablets:translate-x-72 w-[120px] flex gap-1 items-center justify-center transition-transform group-hover:translate-x-0 duration-300"
+          className="bottom-2 text-xs border z-50 text-gray-500 right-2 hover:bg-gray-200 px-[2px] py-[2px] h-fit   hover:text-gray-900 absolute transform cursor-pointer tablets:translate-x-72 w-[120px] flex gap-1 items-center justify-center transition-transform group-hover:translate-x-0 duration-300"
         >
           add to favorites <HiHeart />
         </span>
@@ -121,6 +121,7 @@ export const ProductCard = ({ product }) => {
           {product.category.charAt(0).toUpperCase() + product.category.slice(1)}
         </div>
       </div>
+
       {product.oldPrice && (
         <span className="absolute top-4 py-1 pr-2 text-lg drop-shadow pl-4 bg-green-700 text-white right-0">
           {discountCalc(product.oldPrice, product.price)}% off

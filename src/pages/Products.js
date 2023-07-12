@@ -15,18 +15,9 @@ export const Products = () => {
     for (let keyword of product.keywords) {
       if (category) {
         if (category === keyword) {
-          // console.log(product.name);
-
           sortedList.push(product);
         }
       }
-      // if (category.selectedCategory) {
-      //   if (category.selectedCategory.toLowerCase() === keyword) {
-      //     // console.log(product.name);
-      //     sortedList.push(product);
-      //   }
-      // }
-      // console.log(keyword);
     }
   }
 
