@@ -1,7 +1,7 @@
 import React, { useEffect, useState } from "react";
 import { reset } from "../assets";
 import { useAuthState } from "react-firebase-hooks/auth";
-import { auth, resetPassword, logout } from "../firebase/Firebase";
+import { auth, resetPassword } from "../firebase/Firebase";
 import { Link, useNavigate } from "react-router-dom";
 
 export const Reset = () => {
@@ -69,7 +69,7 @@ export const Reset = () => {
             </Link>
           </div>
 
-          <div onClick={logout}>SIGNOUT</div>
+          {/* <div onClick={logout}>SIGNOUT</div> */}
         </div>
       </div>
     </div>

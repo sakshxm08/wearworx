@@ -24,7 +24,7 @@ export const Header = () => {
   // Profile Tag
   if (user) {
     getUser(user).then((data) => {
-      console.log(data);
+      // console.log(data);
       setName(data.name);
     });
   }

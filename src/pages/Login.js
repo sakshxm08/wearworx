@@ -67,7 +67,7 @@
 //   );
 // };
 
-import React, { useEffect, useState } from "react";
+import React, { useContext, useEffect, useState } from "react";
 import { github, google, login } from "../assets";
 import { useAuthState } from "react-firebase-hooks/auth";
 import {
@@ -75,11 +75,14 @@ import {
   loginWithEmail,
   signInWithGoogle,
   signInWithGithub,
-  logout,
+  // logout,
+  setCart,
 } from "../firebase/Firebase";
 import { Link, useNavigate } from "react-router-dom";
+import CartContext from "../context/cartContext";
 
 export const Login = () => {
+  const cart = useContext(CartContext);
   const [email, setEmail] = useState("");
   const [password, setPassword] = useState("");
   //   const [user, loading, error] = useAuthState(auth);
@@ -93,13 +96,20 @@ export const Login = () => {
     if (user) {
       //   setLoader(false);
       navigate("/");
-      console.log(user);
+      const updateCartOnLogin = async () => {
+        const newCart = await setCart(user);
+        if (newCart) {
+          cart.setCartArray(newCart);
+        }
+      };
+      updateCartOnLogin();
+      //   console.log(user);
     }
 
     // eslint-disable-next-line react-hooks/exhaustive-deps
   }, [user, loading]);
 
-  const loginUser = () => {
+  const loginUser = async () => {
     loginWithEmail(email, password);
   };
   return (
@@ -187,7 +197,7 @@ export const Login = () => {
               </div>
             </div>
           </div>
-          <div onClick={logout}>SIGNOUT</div>
+          {/* <div onClick={logout}>SIGNOUT</div> */}
         </div>
       </div>
     </div>

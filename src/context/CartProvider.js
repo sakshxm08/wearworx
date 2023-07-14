@@ -16,7 +16,7 @@ export const CartProvider = ({ children }) => {
         keywords: keywords,
         oldPrice: oldPrice,
         price: price,
-        qty: qty,
+        qty: 1,
         size: size,
       },
     ]);

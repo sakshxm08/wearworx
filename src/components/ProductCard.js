@@ -13,7 +13,7 @@ export const ProductCard = ({ product }) => {
   const navigate = useNavigate();
   const openProduct = () => {
     navigate(
-      `../${product.name
+      `../product/${product.name
         .toLowerCase()
         .split(" ")
         .join("")

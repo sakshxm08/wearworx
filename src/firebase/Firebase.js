@@ -17,6 +17,8 @@ import {
   collection,
   where,
   addDoc,
+  updateDoc,
+  doc,
 } from "firebase/firestore";
 
 const firebaseConfig = {
@@ -127,11 +129,70 @@ const getUser = async (user) => {
   let userDetails = [];
   const docs = await getDocs(q);
   docs.forEach((doc) => {
-    console.log(doc.data());
+    // console.log(doc.data());
     userDetails.push(doc.data());
   });
-
   return userDetails[0];
+};
+
+// Add to Firebase Cart
+const addToFirebaseCart = async (user, cart) => {
+  try {
+    const q = query(collection(db, "cart"), where("email", "==", user.email));
+    const docs = await getDocs(q);
+    if (docs.docs.length === 0) {
+      await addDoc(collection(db, "cart"), {
+        uid: user.uid,
+        email: user.email,
+        cart: cart,
+      });
+    } else {
+      const preCart = [];
+      docs.forEach((doc) => preCart.push(doc.data().cart));
+      // console.log(preCart[0]);
+
+      // const updatedCart = preCart[0].concat(cart)
+      const updatedCart = preCart[0]
+        .concat(cart)
+        .filter(
+          (obj, index) =>
+            index ===
+            preCart[0]
+              .concat(cart)
+              .findIndex(
+                (product) =>
+                  obj._id === product._id && obj.size === product.size
+              )
+        );
+      await updateDoc(doc(db, "cart", docs.docs[0].id), {
+        cart: updatedCart,
+      });
+    }
+    return docs.docs;
+  } catch (err) {
+    console.error(err);
+    alert(err.message);
+  }
+};
+
+// Get Cart
+const setCart = async (user) => {
+  try {
+    const q = query(collection(db, "cart"), where("email", "==", user.email));
+    const docs = await getDocs(q);
+    const previousCart = [];
+    if (docs.docs.length !== 0) {
+      docs.forEach((doc) => {
+        previousCart.push(doc.data());
+      });
+      // console.log(previousCart);
+      return previousCart[0].cart;
+    }
+    return 0;
+  } catch (err) {
+    console.log(err);
+    alert(err.message);
+  }
 };
 
 export {
@@ -144,6 +205,8 @@ export {
   resetPassword,
   getUser,
   logout,
+  addToFirebaseCart,
+  setCart,
 };
 
 // // Get Users

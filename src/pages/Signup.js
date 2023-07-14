@@ -6,7 +6,7 @@ import {
   signupWithEmail,
   signInWithGoogle,
   signInWithGithub,
-  logout,
+  // logout,
 } from "../firebase/Firebase";
 import { Link, useNavigate } from "react-router-dom";
 
@@ -125,7 +125,7 @@ export const Signup = () => {
             </div>
           </div>
 
-          <div onClick={logout}>SIGNOUT</div>
+          {/* <div onClick={logout}>SIGNOUT</div> */}
         </div>
         <div className="relative">
           <img src={signup} alt="" className="w-[30rem]" />

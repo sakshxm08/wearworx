@@ -7,34 +7,32 @@ import CartContext from "../context/cartContext";
 import Modal from "react-modal";
 import { toast } from "react-toastify";
 import FavContext from "../context/favContext";
-// import UserContext from "../context/userContext";
-// import { addUser } from "../firebase/Firebase";
+import { auth, addToFirebaseCart } from "../firebase/Firebase";
+import { useAuthState } from "react-firebase-hooks/auth";
 
 export const CartItem = ({ product }) => {
-  // CONTEXTS
+  const [user] = useAuthState(auth);
   const fav = useContext(FavContext);
-  // const auth = useContext(UserContext);
-  const cart = useContext(CartContext);
-
-  // MODALS
   const [qtyModalOpen, setQtyModalOpen] = useState(false);
   const [removeModalOpen, setRemoveModalOpen] = useState(false);
-  const [quanity, setQuantity] = useState(product.qty);
-
-  // REMOVE ITEMS
+  const cart = useContext(CartContext);
+  let [productQty, setProductQty] = useState(product.qty);
   const removeItem = (arr, product) => {
     cart.setCartArray(arr.filter((prod) => prod !== product));
-    console.log(arr);
-    // if (auth.user) {
-    //   addUser(
-    //     auth.user,
-    //     arr.filter((prod) => prod !== product),
-    //     fav.favArray
-    //   );
-    // }
+    if (user) {
+      addToFirebaseCart(user, cart.cartArray).then((data) => {
+        console.log(cart.cartArray);
+      });
+    }
+    // console.log(arr);
   };
-
-  // ADD TO FAVORITES
+  // useEffect(() => {
+  //   if (user) {
+  //     addToFirebaseCart(user, cart.cartArray).then((data) => {
+  //       console.log(data);
+  //     });
+  //   }
+  // }, [cart.cartArray, productQty]);
   const addToFav = (product) => {
     if (!fav.favArray.find((item) => item._id === product._id)) {
       fav.addToFav(product);
@@ -126,7 +124,7 @@ export const CartItem = ({ product }) => {
                 }}
                 className="cursor-pointer flex items-center justify-center w-fit gap-1 mt-2 px-2 py-1 bg-gray-100 font-semibold rounded-sm text-xs"
               >
-                Qty: {quanity}{" "}
+                Qty: {product.qty}{" "}
                 <IoIosArrowDown className="text-xs"></IoIosArrowDown>
               </span>
             </div>
@@ -184,22 +182,22 @@ export const CartItem = ({ product }) => {
               <div className="flex gap-2 items-center justify-center">
                 <span
                   onClick={() => {
-                    // product.qty = product.qty === 1 ? 1 : product.qty--;
-                    setQuantity(quanity === 1 ? 1 : quanity - 1);
+                    // // product.qty = product.qty === 1 ? 1 : product.qty--;
 
-                    // cart.setQty(cart.qty === 1 ? 1 : cart.qty - 1);
+                    // // cart.setQty(cart.qty === 1 ? 1 : cart.qty - 1);
+                    setProductQty(productQty === 1 ? 1 : productQty - 1);
                   }}
                   className="px-2 select-none border text-sm hover:bg-gray-600 hover:border-gray-600 cursor-pointer hover:text-white duration-200"
                 >
                   -
                 </span>
                 {/* <span className="w-6 text-center">{product.qty}</span> */}
-                <span className="w-6 text-center">{quanity}</span>
+                <span className="w-6 text-center">{productQty}</span>
                 <span
                   onClick={() => {
                     // cart.setQty(cart.qty + 1);
                     // product.qty++;
-                    setQuantity(quanity + 1);
+                    setProductQty(productQty + 1);
                   }}
                   className=" px-2 select-none border text-sm hover:bg-gray-600 hover:border-gray-600 cursor-pointer hover:text-white duration-200"
                 >
@@ -212,10 +210,10 @@ export const CartItem = ({ product }) => {
                 setQtyModalOpen(false);
                 // product.qty = cart.qty;
                 // cart.setQty(quanity + product.qty);
+                cart.setQty(productQty);
 
-                product.qty = quanity;
-                console.log(cart.cartArray, cart.qty);
-                // addUser(auth.user, cart.cartArray, fav.favArray);
+                product.qty = productQty;
+                // console.log(cart.cartArray, cart.qty);
                 // cart.setQty(cart.qty);
               }}
               className="w-full bg-green-600 rounded-sm text-white uppercase tracking-widest text-xs py-3 mt-3 font-medium hover:bg-green-700 active:bg-green-900 duration-200"
@@ -225,14 +223,13 @@ export const CartItem = ({ product }) => {
           </div>
           <div
             onClick={() => {
-              // cart.setQty(1);
               setQtyModalOpen(false);
+              cart.setQty(productQty);
               // product.qty = cart.qty;
-              // cart.setQty(quanity + product.qty);
+              // cart.setQty(productQty + product.qty);
 
-              product.qty = quanity;
-              console.log(cart.cartArray, cart.qty);
-              // addUser(auth.user, cart.cartArray, fav.favArray);
+              product.qty = productQty;
+              // console.log(cart.cartArray, cart.qty);
             }}
             className="absolute top-6 right-6 cursor-pointer"
           >

@@ -7,15 +7,19 @@ import CartContext from "../context/cartContext";
 import { toast } from "react-toastify";
 import "react-toastify/dist/ReactToastify.css";
 import FavContext from "../context/favContext";
+import { useAuthState } from "react-firebase-hooks/auth";
+import { addToFirebaseCart, auth } from "../firebase/Firebase";
 // import { addUser, getCartData } from "../firebase/Firebase";
-import UserContext from "../context/userContext";
+// import UserContext from "../context/userContext";
 
 const ProductPage = () => {
-  const auth = useContext(UserContext);
+  // const auth = useContext(UserContext);
+  const [user] = useAuthState(auth);
 
   const location = useLocation();
   const product = location.state;
-  const [i, setI] = useState(0);
+  const [change, setChange] = useState(0);
+  const [updateCart, setUpdateCart] = useState(0);
 
   const cart = useContext(CartContext);
   const fav = useContext(FavContext);
@@ -33,9 +37,11 @@ const ProductPage = () => {
       (prod) => prod._id === product._id && prod.size === cart.size
     );
     if (repeatProduct) {
-      repeatProduct.qty++;
-      toast.success(
-        "You have this item in your bag and we have increased the quanity by 1",
+      // repeatProduct.qty++;
+      setUpdateCart(!updateCart);
+      toast.info(
+        // "You have this item in your cart and we have increased the quanity by 1",
+        "Already in cart",
         {
           position: "top-right",
           autoClose: 3000,
@@ -45,7 +51,8 @@ const ProductPage = () => {
           draggable: true,
           progress: undefined,
           theme: "dark",
-          bodyClassName: "text-xs font-bodyFont",
+          // bodyClassName: "text-xs font-bodyFont",
+          bodyClassName: " font-titleFont",
         }
       );
     } else {
@@ -62,7 +69,9 @@ const ProductPage = () => {
       });
     }
     await cart.setSize(null);
-    setI(i + 1);
+    setChange(!change);
+    setUpdateCart(!updateCart);
+
     document
       .getElementById(`add-to-cart-${product.name}`)
       .classList.remove("flex");
@@ -75,7 +84,7 @@ const ProductPage = () => {
       .classList.remove("hidden");
   };
 
-  const newArray = cart.cartArray.filter(
+  const fullCart = cart.cartArray.filter(
     (obj, index) =>
       index ===
       cart.cartArray.findIndex(
@@ -84,15 +93,22 @@ const ProductPage = () => {
   );
 
   useEffect(() => {
-    cart.setCartArray(newArray);
-    console.log(newArray, i);
-    if (auth.user) {
-      // addUser(auth.user, newArray, fav.favArray);
-    }
-    console.log(fav.favArray, i);
+    cart.setCartArray(fullCart);
+    // console.log(fullCart, i);
+    // if (auth.user) {
+    // addUser(auth.user, fullCart, fav.favArray);
+    // }
+    // console.log(fav.favArray, i);
     // eslint-disable-next-line react-hooks/exhaustive-deps
-  }, [i]);
-
+  }, [change]);
+  useEffect(() => {
+    if (user) {
+      addToFirebaseCart(user, fullCart).then((data) => {
+        // console.log(data);
+      });
+    }
+    // eslint-disable-next-line react-hooks/exhaustive-deps
+  }, [cart.cartArray, updateCart]);
   const onSizeChange = (e) => {
     cart.setSize(e.target.value);
     document
@@ -111,7 +127,7 @@ const ProductPage = () => {
   const addToFav = () => {
     if (!fav.favArray.find((item) => item === product)) {
       fav.addToFav(product);
-      setI(i + 1);
+      setChange(!change);
 
       toast.success("Added to Favorites", {
         toastId: `${product._id}-${product.name}`,
@@ -327,9 +343,9 @@ const ProductPage = () => {
             <div className="w-1/2 md:w-fit">
               <button
                 onClick={() => {
-                  if (auth.user) {
+                  if (user) {
                     addToFav();
-                    // addUser(auth.user, newArray, fav.favArray);
+                    // addUser(auth.user, fullCart, fav.favArray);
                   } else alert("Login to Continue");
                 }}
                 className="w-full mobile:w-80 tablets:w-56 font-titleFont flex items-center justify-center gap-2 font-medium hover:bg-green-100 duration-200 cursor-pointer tracking-wider text-xs md:text-base bg-white text-green-600 border border-green-600 py-3 rounded"
@@ -338,9 +354,9 @@ const ProductPage = () => {
                 Move to Favorites
               </button>
             </div>
-            <button
+            {/* <button
               onClick={() => {
-                // addUser(auth.user, newArray, fav.favArray);
+                // addUser(auth.user, fullCart, fav.favArray);
               }}
             >
               ADD
@@ -351,7 +367,7 @@ const ProductPage = () => {
               }}
             >
               VIEW DATA
-            </button>
+            </button> */}
           </div>
         </div>
       </div>

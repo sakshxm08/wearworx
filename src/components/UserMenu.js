@@ -1,20 +1,25 @@
-import React, { useState } from "react";
+import React, { useContext, useState } from "react";
 import { auth, getUser, logout } from "../firebase/Firebase";
 import { Link } from "react-router-dom";
 import { useAuthState } from "react-firebase-hooks/auth";
+import CartContext from "../context/cartContext";
 export const UserMenu = () => {
   // const [user, loading, error] = useAuthState(auth);
+  const cart = useContext(CartContext);
   const [user] = useAuthState(auth);
   const [email, setEmail] = useState("");
   const [name, setName] = useState("");
   if (user) {
     getUser(user).then((data) => {
-      console.log(data);
+      // console.log(data);
       setName(data.name);
       setEmail(data.email);
     });
   }
-
+  const signout = () => {
+    logout();
+    cart.setCartArray([]);
+  };
   return (
     <div className=" p-4 drop-shadow-lg mt-2  bg-white w-max flex flex-col gap-1 cursor-default">
       <div className="flex gap-2 items-center border-b pb-4">
@@ -44,7 +49,7 @@ export const UserMenu = () => {
       </div>
       <div>
         <div
-          onClick={logout}
+          onClick={signout}
           className=" p-1 cursor-pointer font-light text-sm text-red-500 hover:bg-gray-100 duration-200"
         >
           Sign Out

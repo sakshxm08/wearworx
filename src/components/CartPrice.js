@@ -12,7 +12,7 @@ export const CartPrice = () => {
     quantity += item.qty;
     if (item.oldPrice) totalMRP += item.oldPrice * item.qty;
     else {
-      totalMRP = totalPrice;
+      totalMRP += totalPrice;
     }
   }
 
