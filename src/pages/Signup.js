@@ -38,12 +38,12 @@ export const Signup = () => {
 
   return (
     <div className="relative">
-      <div className="w-fit my-20 flex gap-8 mx-auto items-center relative">
+      <div className="lg:p-0 p-0 md:px-10 w-fit my-20 flex gap-8 mx-auto items-center ">
         {/* {loader ? <div>Loading</div> : <></>} */}
 
-        <div className="flex flex-col gap-8 w-[30rem]">
-          <div className="flex flex-col gap-4">
-            <h1 className="text-3xl font-bold font-bodyFont tracking-wider">
+        <div className="flex flex-col gap-8 w-fit  md:w-[30rem]">
+          <div className="flex flex-col gap-4 md:items-start items-center">
+            <h1 className="text-3xl sm:text-2xl tablets:text-3xl font-bold font-bodyFont tracking-wider">
               Create Account
             </h1>
             <div className="flex gap-4 items-center">
@@ -78,40 +78,40 @@ export const Signup = () => {
               </div>
             </div>
           </div>
-          <div className="flex flex-col gap-6">
-            <span className="font-light text-sm text-gray-500">
+          <div className="flex flex-col gap-6 md:items-start justify-center items-center">
+            <span className=" font-light text-sm text-gray-500">
               or use your email for registration
             </span>
             <input
               type="name"
               placeholder="Name"
-              className="border border-gray-400 px-4 py-2 w-full focus-visible:outline-green-600"
+              className="border border-gray-400 px-4 py-2 sm:py-1 md:text-base text-sm tablets:py-2 w-full mobile:w-96 sm:w-full focus-visible:outline-green-600"
               value={name}
               onChange={(e) => setName(e.target.value)}
             />
             <input
               type="email"
               placeholder="Email"
-              className="border border-gray-400 px-4 py-2 w-full focus-visible:outline-green-600"
+              className="border border-gray-400 px-4 py-2 sm:py-1 md:text-base text-sm tablets:py-2 w-full mobile:w-96 sm:w-full focus-visible:outline-green-600"
               value={email}
               onChange={(e) => setEmail(e.target.value)}
             />
             <input
               type="password"
               placeholder="Password"
-              className="border border-gray-400 px-4 py-2 w-full focus-visible:outline-green-600"
+              className="border border-gray-400 px-4 py-2 sm:py-1 md:text-base text-sm tablets:py-2 w-full mobile:w-96 sm:w-full focus-visible:outline-green-600"
               value={password}
               onChange={(e) => setPassword(e.target.value)}
             />
           </div>
-          <div className="flex  items-center justify-between">
+          <div className="flex flex-col lg:flex-row md:items-start  items-center lg:gap-0 gap-4  justify-center lg:justify-between">
             <button
               onClick={register}
-              className="w-48 text-base uppercase text-white tracking-wider font-titleFont font-medium py-3 bg-green-500 hover:bg-green-600 duration-200 rounded-full"
+              className="w-36 tablets:w-48 text-sm  tablets:text-base uppercase text-white tracking-wider font-titleFont font-medium py-3 bg-green-500 hover:bg-green-600 duration-200 rounded-full"
             >
               Sign up
             </button>
-            <div className=" flex   gap-2 font-titleFont">
+            <div className=" flex tablets:text-base text-sm  gap-2 font-titleFont">
               <span>Already a user?</span>
               <Link to="/login">
                 <span
@@ -127,8 +127,8 @@ export const Signup = () => {
 
           {/* <div onClick={logout}>SIGNOUT</div> */}
         </div>
-        <div className="relative">
-          <img src={signup} alt="" className="w-[30rem]" />
+        <div className="md:relative absolute md:opacity-100 opacity-20 left-0 -z-50 md:w-fit w-screen ">
+          <img src={signup} alt="" className="w-fit md:w-[30rem]" />
         </div>
       </div>
     </div>

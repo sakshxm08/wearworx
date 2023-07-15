@@ -24,6 +24,7 @@ import login from "./login.png";
 import github from "./github.png";
 import signup from "./signup.png";
 import reset from "./reset-pass.png";
+import fashionRunway from "./fashion-runway.jpg";
 export {
   logoText,
   logoLightText,
@@ -51,4 +52,5 @@ export {
   github,
   signup,
   reset,
+  fashionRunway,
 };

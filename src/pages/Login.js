@@ -114,47 +114,49 @@ export const Login = () => {
   };
   return (
     <div className="relative">
-      <div className="w-fit my-20 flex gap-8 mx-auto items-center relative">
-        <div className="absolute right-0 top-10 flex gap-2 font-titleFont">
-          <span>New User?</span>
-          <Link to="/signup">
-            <span className="text-green-600 py-2 font-semibold hover:text-green-700 after:content-[''] scale-x after:h-px after:w-full after:scale-x-0 hover:after:scale-x-100 after:duration-300 after:bg-green-700 after:absolute after:bottom-0 after:left-0 cursor-pointer duration-200 relative">
-              Sign Up
-            </span>
-          </Link>
+      <div className="lg:p-0 p-0 sm:px-10 w-fit my-20 flex gap-8 mx-auto items-center">
+        <div className="sm:relative absolute sm:opacity-100 opacity-20 left-0 -z-50 sm:w-fit w-screen ">
+          <img src={login} alt="" className="w-fit sm:w-[30rem]" />
         </div>
-        <div>
-          <img src={login} alt="" className="w-[30rem]" />
-        </div>
-        <div className="flex flex-col gap-8 w-[30rem]">
-          <div className="flex flex-col gap-1">
-            <h1 className="text-3xl font-bold font-bodyFont tracking-wider">
-              Welcome Back!
-            </h1>
-            <span className="font-light text-base text-gray-500">
+        <div className="flex flex-col gap-8 w-fit sm:w-[30rem]">
+          <div className="flex flex-col gap-1 md:items-start items-center">
+            <div className="flex justify-between items-center">
+              <h1 className="text-3xl sm:text-2xl tablets:text-3xl  font-bold font-bodyFont tracking-wider">
+                Welcome Back!
+              </h1>
+              <div className="hidden lg:flex gap-2 font-titleFont">
+                <span>New User?</span>
+                <Link to="/signup">
+                  <span className="text-green-600 py-2 font-semibold hover:text-green-700 after:content-[''] scale-x after:h-px after:w-full after:scale-x-0 hover:after:scale-x-100 after:duration-300 after:bg-green-700 after:absolute after:bottom-0 after:left-0 cursor-pointer duration-200 relative">
+                    Sign Up
+                  </span>
+                </Link>
+              </div>
+            </div>
+            <span className="font-light tablets:text-base text-sm text-gray-500">
               Login to continue
             </span>
           </div>
-          <div className="flex flex-col gap-6">
+          <div className="flex flex-col gap-6 md:items-start items-center">
             <input
               type="text"
               placeholder="Email"
-              className="border border-gray-400 px-4 py-2 w-full focus-visible:outline-green-600"
+              className="border border-gray-400 px-4 py-2 sm:py-1 md:text-base text-sm tablets:py-2 w-full mobile:w-96 sm:w-full focus-visible:outline-green-600"
               value={email}
               onChange={(e) => setEmail(e.target.value)}
             />
             <input
               type="password"
               placeholder="Password"
-              className="border border-gray-400 px-4 py-2 w-full focus-visible:outline-green-600"
+              className="border border-gray-400 px-4 py-2 sm:py-1 tablets:py-2 w-full mobile:w-96 sm:w-full md:text-base text-sm focus-visible:outline-green-600"
               value={password}
               onChange={(e) => setPassword(e.target.value)}
             />
           </div>
-          <div className="flex gap-10 items-center justify-between">
+          <div className="flex flex-col md:flex-row  items-center md:gap-0 gap-4 justify-center md:justify-between">
             <button
               onClick={loginUser}
-              className="w-48 text-base uppercase text-white tracking-wider font-titleFont font-medium py-3 bg-green-500 hover:bg-green-600 duration-200 rounded-full"
+              className="w-36 tablets:w-48 text-sm  tablets:text-base uppercase text-white tracking-wider font-titleFont font-medium py-3 bg-green-500 hover:bg-green-600 duration-200 rounded-full"
             >
               Login
             </button>
@@ -164,7 +166,7 @@ export const Login = () => {
               </span>
             </Link>
           </div>
-          <div className="flex gap-5 items-center">
+          <div className="flex md:mx-0 mx-auto gap-5 items-center">
             <span className=" tracking-wider text-gray-500 font-titleFont font-medium text-sm">
               Login with
             </span>
@@ -196,6 +198,14 @@ export const Login = () => {
                 </div>
               </div>
             </div>
+          </div>
+          <div className="lg:hidden tablets:text-base text-sm mx-auto flex gap-2 font-titleFont">
+            <span>New User?</span>
+            <Link to="/signup">
+              <span className="text-green-600 py-2 font-semibold hover:text-green-700 after:content-[''] scale-x after:h-px after:w-full after:scale-x-0 hover:after:scale-x-100 after:duration-300 after:bg-green-700 after:absolute after:bottom-0 after:left-0 cursor-pointer duration-200 relative">
+                Sign Up
+              </span>
+            </Link>
           </div>
           {/* <div onClick={logout}>SIGNOUT</div> */}
         </div>

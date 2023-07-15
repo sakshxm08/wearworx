@@ -11,6 +11,9 @@ module.exports = {
         mobile: "500px",
         tablets: "850px",
       },
+      backgroundImage: {
+        404: "url('./assets/fashion-runway.jpg')",
+      },
     },
   },
   plugins: [],
