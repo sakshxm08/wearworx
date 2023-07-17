@@ -61,9 +61,11 @@ npm install
 4. Create a .env file in the root directory and add your Firebase config:
 ```sh
 REACT_APP_FIREBASE_API_KEY=your_api_key
-REACT_APP_FIREBASE_AUTH_DOMAIN=your_auth_domain
-REACT_APP_FIREBASE_PROJECT_ID=your_project_id
-REACT_APP_FIREBASE_APP_ID=your_app_id
+REACT_APP_AUTHDOMAIN=your_auth_domain
+REACT_APP_PROJECTID=your_project_id
+REACT_APP_STORAGE_BUCKET=your_storage_bucket
+REACT_APP_MESSAGE_SENDER_ID=your_message_sender_id
+REACT_APP_APP_ID=your_app_id
 ```
 5. Start the development server:
 ```sh
