@@ -1,7 +1,7 @@
 
-![WearWorx Logo](https://i.ibb.co/nn6J51f/logo-with-text-6dc27f9c24faef9ff2b4-removebg-preview.png)
+![WearWorx Logo][url]
 
-
+[url]: https://imgtr.ee/images/2023/07/17/c65acb139f9b024ea0c628bda70d6f48.png
 
 
 
@@ -33,13 +33,6 @@ WearWorx brings you the latest trends in fashion, making it easy and enjoyable t
 ## Demo
 
 Visit [WearWorx](https://wearworx.netlify.app) and explore the latest fashion trends today!
-
-
-
-
-
-
-
     
 ## Installation
 
