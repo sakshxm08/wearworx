@@ -1,5 +1,5 @@
 
-![WearWorx Logo](https://wearworx.netlify.app/static/media/logo-with-text.6dc27f9c24faef9ff2b4.png)
+![WearWorx Logo](https://i.ibb.co/nn6J51f/logo-with-text-6dc27f9c24faef9ff2b4-removebg-preview.png)
 
 
 
