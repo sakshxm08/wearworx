@@ -43,7 +43,6 @@ To run WearWorx locally on your machine, follow these steps:
 ```sh
 git clone https://github.com/sakshxm08/wearworx.git
 cd wearworx
-cd client
 ```
 
 2. Install the required dependencies:
